@@ -26,9 +26,9 @@ UPLOAD_DIR = os.path.join(BASE_DIR, "Uploads")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 
-# ==========================
+
 # Validate Uploaded File Type
-# ==========================
+
 # Perform two levels of file-type validation:
 #
 # 1. Validate the MIME ( MIME (Multipurpose Internet Mail Extension type) Written as type/subtype)
@@ -100,7 +100,9 @@ def validate_file_size_type(file: UploadFile):
     file.file.seek(0)
 
 
-
+# A function to detect the plate as well as dwtecting the number plate
+# we are running the sub-processes for yolo and ocr 
+# and using bbox.json and result.json to get the final result from yolo and ocr_engine 
 async def detect_image(file_path :str):
     # Running YOLO detector 
     subprocess.run(
@@ -123,6 +125,7 @@ async def detect_image(file_path :str):
     # Declaring the cv2 image variable
     img = cv2.imread(file_path)
 
+    # Drawing the number plate box and the number plate on cv2 image
     x1 = bbox["x1"]
     y1 = bbox["y1"]
     x2 = bbox["x2"]
@@ -150,6 +153,8 @@ async def detect_image(file_path :str):
 
     # Savin the final output iage with bbox and text as .jpg
     cv2.imwrite("Output-img/output.jpg", img)
+
+    # Returning the result
     return {
         "message": "Detection completed",
         "number_plate" : plate,
