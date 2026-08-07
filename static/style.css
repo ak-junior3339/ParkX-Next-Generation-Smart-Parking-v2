@@ -1,0 +1,378 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #819A91;
+  color: #ffffff;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: -20px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(3rem, 5vw, 4.25rem);
+  letter-spacing: -0.04em;
+  color: #000000;
+  font-weight: 800;
+}
+
+
+.app-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 24px 32px;
+}
+
+
+
+.site-footer {
+  margin-top: 32px;
+  text-align: center;
+  color: #000000;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+
+button {
+  display: inline-block;
+  margin: 30px auto 0;
+  width: 50%;
+  padding: .75rem 1.25rem;
+  border-radius: 10rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: .15rem;
+  transition: color 1s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border: none;
+  background: transparent;
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #D85A30;
+  border-radius: 10rem;
+  z-index: -2;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #A13A21;
+  transition: width .3s ease;
+  border-radius: 10rem;
+  z-index: -1;
+}
+
+button:hover {
+  color: #ffffff;
+}
+
+button:hover::before {
+  width: 100%;
+}
+
+
+hr{
+    height: 3px;
+    background-color:black;
+    width: 100%;
+}
+.intro-card{
+    background: #000000;
+    padding: 40px;
+}
+#info{
+    display: flex;
+    justify-content: center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 25px;
+    color: #819A91;
+    text-align: center;
+}
+
+img { display: block; margin-left: auto; margin-right: auto; width: 50%; }
+
+#uploadForm {
+    width: 100%;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #000000;
+    border: 1px solid #D85A30;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+}
+
+.upload-label{
+    font-size: 15px;
+    display: flex;
+    color: #D85A30;
+    margin-bottom: 15px;
+}
+
+#imageInput {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 20px;
+
+    font-size: 15px;
+    font-family: inherit;
+
+    color: #374151;
+    background: #f9fafb;
+
+    border: 2px dashed #cbd5e1;
+    border-radius: 10px;
+
+    cursor: pointer;
+    box-sizing: border-box;
+
+    transition: all 0.2s ease;
+}
+
+
+#imageInput:hover {
+    border-color: #3b82f6;
+    background: #f8fafc;
+}
+
+
+#imageInput:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+#plateNumber{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 28px;
+    margin: 0;
+    font-size: clamp(3rem, 5vw, 4.25rem);
+    letter-spacing: -0.04em;
+    color: red;
+    font-weight: 800;
+}
+
+#confidence{
+    text-align: center;
+    margin-top: 28px;
+    margin: 0;
+    font-size: 18px;
+    letter-spacing: -0.04em;
+    color: black;
+    font-weight: 800;
+}
+
+.loading-container {
+    width: 100%;
+    text-align: center;
+    margin: 35px auto;
+    animation: fadeIn 0.4s ease;
+}
+
+/* ==========================
+   Number Plate
+   ========================== */
+
+.plate-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.plate-frame {
+    position: relative;
+
+    width: 260px;
+    height: 70px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #ffffff;
+
+    border: 3px solid #222;
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.15);
+
+    animation: platePulse 1.8s ease-in-out infinite;
+}
+
+/* Fake number plate text */
+
+.plate-text {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #222;
+
+    opacity: 0.65;
+}
+
+/* ==========================
+   Scanning Line
+   ========================== */
+
+.scan-line {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background: #D85A30;
+
+    box-shadow:
+        0 0 10px #D85A30,
+        0 0 20px #D85A30,
+        0 0 35px rgba(216, 90, 48, 0.7);
+
+    animation: scan 1.6s ease-in-out infinite;
+}
+
+
+/* ==========================
+   Text
+   ========================== */
+
+.loading-title {
+    margin-top: 18px;
+    margin-bottom: 5px;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    color: #333;
+
+    animation: textPulse 1.5s ease-in-out infinite;
+}
+
+.loading-subtitle {
+    margin-top: 0;
+
+    font-size: 14px;
+    color: #777;
+}
+
+
+/* ==========================
+   Animations
+   ========================== */
+
+@keyframes scan {
+
+    0% {
+        left: 0%;
+    }
+
+    50% {
+        left: calc(100% - 4px);
+    }
+
+    100% {
+        left: 0%;
+    }
+
+}
+
+
+@keyframes platePulse {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+
+@keyframes textPulse {
+
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+
+}
+
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+input,
+select {
+  width: 50%;
+  padding: 14px 16px;
+  margin :30px auto 0;
+  border-radius: 18px;
+  border: 1px solid rgba(159, 225, 203, 0.2);
+  background: rgba(21, 25, 27, 0.6);
+  font-size: 1rem;
+  color: #f8fafc;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239FE1CB'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
+}
