@@ -25,6 +25,9 @@ def read_plate():
     plate = result[0]["rec_texts"][0]
     # Extracting the confidence from result output 
     confidence = result[0]["rec_scores"][0]
+
+    # Now using regular expression and pattern matching and then checking if state code belong to a valid 
+    # status code
     plate = plate.upper().strip()
     plate = re.sub(r'[\s\-:.]+', '', plate)
     plate = re.sub(r'^(?:IND|IN|I)', '', plate)
