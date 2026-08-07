@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> ParkX-Next-generation smart parking</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+<div class="app-shell">
+    <header class="hero">
+        <h1>Welcome to ParkX<br>Next-generation smart parking</h1>
+        <hr />
+    </header>
+</div>
+<div class="intro-card">
+    <h2 id="info">Instructions : </h2>
+    <p id="info"> Please Go Ahead and Upload the Picture of the car with visible Plates</p>
+    <p id="info">One's Uploaded You will see the Information about the Number Plate</p>
+    <p id="info">Click On Check In To Admit the Car into the Parking Lot</p>
+</div>
+
+<form id="uploadForm">
+    <label for="imageInput" class="upload-label">
+        Upload Vehicle Image
+    </label>
+    <label for="imageinstruction" class="upload-label">
+        Please Select .JPEG / .JPG / .PNG
+    </label>
+    <input
+        type="file"
+        id="imageInput"
+        name="file"
+        accept="image/png,image/jpeg"
+        required
+    >
+</form>
+
+<div id="result">
+
+    <div id="loading" class="loading-container" style="display: none;">
+    <p class="loading-title">Scanning Number Plate</p>
+    <p class="loading-subtitle">Please wait while we identify the vehicle...</p>
+
+</div>
+
+    <img
+        id="resultImage"
+        style="display: none; max-width: 600px;"
+        alt="Annotated Image"
+    >
+
+    <h2 id="plateNumber"></h2>
+
+    <p id="confidence"></p>
+
+    <input type="text" id="emergency" placeholder="eg.(MP09AA1234)" style="display: none;">
+
+    <button id="checkInButton" type="button" style="display: none;">
+        Check-in
+    </button>
+    <button id="redetectButton" type="button" style="display: none;"><a href="/" style="text-decoration: none; color: white;">Re-Detect</a></button> 
+</div>
+<script>
+
+const form = document.getElementById("uploadForm");
+
+form.addEventListener("change", async function(event) {
+
+    // Prevent normal form submission.
+    // Without this, the browser will navigate to /file
+    // and display the JSON response.
+    event.preventDefault();
+
+    const fileInput = document.getElementById("imageInput");
+
+    if (!fileInput.files.length) {
+        return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("file", fileInput.files[0]);
+
+    try {
+
+        document.getElementById("loading").style.display = "block";
+
+        const response = await fetch("/file", {
+            method: "POST",
+            body: formData
+        });
+
+        document.getElementById("loading").style.display = "none";
+
+        const data = await response.json();
+
+        if (!response.ok) {
+
+            const errorData = await response.json();
+
+            throw new Error(errorData.detail);
+        }
+
+        console.log(data);
+
+        // Display number plate
+        document.getElementById("plateNumber").textContent =
+            data.number_plate;
+
+        // Display confidence
+        document.getElementById("confidence").textContent =
+            "Confidence: " + (data.confidence * 100);
+
+        // Display annotated image
+        const image = document.getElementById("resultImage");
+
+        image.src = data.image_url + "?t=" + new Date().getTime();
+
+        image.style.display = "block";
+
+        if ((data.number_plate)== "Cannot detect or Invalid"){
+            document.getElementById("emergency").style.display = "block";
+        }
+        document.getElementById("checkInButton").style.display = "block";
+        document.getElementById("redetectButton").style.display = "block";
+    }
+    catch (error) {
+
+        console.error("Error:", error);
+
+        document.getElementById("errorMessage").style.display =
+            "block";
+
+        document.getElementById("errorMessage").textContent =
+            error.message;
+    }
+
+});
+
+</script>
+</body> 
+<footer class="site-footer">Made with ❤️ by ak_junior</footer> </html>
