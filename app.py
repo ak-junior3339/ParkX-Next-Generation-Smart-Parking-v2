@@ -9,7 +9,7 @@ import subprocess
 import sys
 import json
 import cv2
-from database import create_tables , check_in
+from database import create_tables , check_in , check_out
 from pydantic import BaseModel
 
 app = FastAPI(title="Smart-Park" , version="3.0")
@@ -206,4 +206,11 @@ class CheckInRequest(BaseModel):
 @app.post("/check-in")
 def check_in_vehicle(request : CheckInRequest):
     result = check_in(request.plate_number)
+    return result
+
+class CheckOutRequest(BaseModel):
+    plate_number : str 
+@app.post("/check-out")
+def check_out_vehicle(request : CheckOutRequest):
+    result = check_out(request.plate_number)
     return result
