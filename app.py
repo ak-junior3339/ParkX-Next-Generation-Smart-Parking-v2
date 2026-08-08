@@ -9,7 +9,8 @@ import subprocess
 import sys
 import json
 import cv2
-from database import create_tables
+from database import create_tables , check_in
+from pydantic import BaseModel
 
 app = FastAPI(title="Smart-Park" , version="3.0")
 create_tables()
@@ -199,3 +200,10 @@ async def upload_file(file: UploadFile = File(...)):
     result = await detect_image(file_path)
     return result
 
+class CheckInRequest(BaseModel):
+    plate_number:str
+
+@app.post("/check-in")
+def check_in_vehicle(request : CheckInRequest):
+    result = check_in(request.plate_number)
+    return result
