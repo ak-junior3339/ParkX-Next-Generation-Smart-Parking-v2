@@ -88,6 +88,8 @@ def create_parking_entry(vehicle_id):
 
     return parking_id
     
+
+# Function for checking in the vehicle     
 def check_in(plate_number):
     conn = get_conn()
     cursor = conn.cursor()
@@ -104,7 +106,7 @@ def check_in(plate_number):
 
     cursor.execute("""
         SELECT * FROM parking WHERE  vehicle_id = ? AND status = 'PARKED'
-    """)
+    """,(vehicle_id,))
 
     active_parking = cursor.fetchone()
     conn.close()
@@ -117,11 +119,52 @@ def check_in(plate_number):
             "parking_id": active_parking["id"]
         }
     
-
+    # Creating a parking record if not already exsists
     parking_id = create_parking_entry(vehicle_id)
     return {
         "success": True,
         "message": "Vehicle checked in successfully.",
         "vehicle_id": vehicle_id,
         "parking_id": parking_id
+    }
+
+# Function for checking out the vehicle
+def check_out(plate_number):
+    conn = get_conn()
+    cursor = conn.cursor()
+
+    # First job is to check wheteher vehicle exsists or not
+    vehicle = get_vehicle(plate_number)
+    if vehicle is None:
+        return {
+            "success": False,
+            "message": "Vehicle does not exist."
+        }
+    vehicle_id = vehicle["id"]
+
+    cursor.execute("""
+        SELECT * FROM parking WHERE vehicle_id = ? AND status = 'PARKED'
+    """,(vehicle_id,))
+
+    parking_record = cursor.fetchone()
+
+    if parking_record is None :
+        conn.close()
+        return {
+            "success": False,
+            "message": "No matching parking record found. Vehicle is not currently parked."
+        }
+    
+    cursor.execute("""
+        UPDATE parking SET check_out_time = CURRENT_TIMESTAMP,status = 'COMPLETED' where id = ?
+    """,(parking_record["id"],))
+
+    conn.close()
+    conn.commit()
+
+    return {
+        "success": True,
+        "message": "Vehicle checked out successfully.",
+        "vehicle_id": vehicle_id,
+        "parking_id": parking_record["id"]
     }
