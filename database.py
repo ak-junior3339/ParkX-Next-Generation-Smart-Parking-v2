@@ -25,7 +25,7 @@ def create_tables():
 
     # Now creating Parking table 
     cursor.execute("""
-        CREATE TABLE IF NOT EXSISTS parking (
+        CREATE TABLE IF NOT EXISTS parking (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             vehicle_id INTEGER NOT NULL,
             check_in_time DATETIME DEFAULT CURRENT_TIMESTAMP,
