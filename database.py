@@ -41,3 +41,27 @@ def create_tables():
     conn.commit()
     conn.close()
 
+def add_vehicles(plate_number):
+    conn = get_conn()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO vehicles (plate_number) VALUES (?)
+    """,(plate_number,))
+    # passing plate number as a tuple of size 1 
+
+    conn.commit()
+    vehicle_id = cursor.lastrowid
+    conn.close()
+    return vehicle_id
+
+
+def get_vehicle(plate_number):
+    conn = get_conn()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT * FROM vehicles where plate_number = ?
+    """,(plate_number,))
+
+    
