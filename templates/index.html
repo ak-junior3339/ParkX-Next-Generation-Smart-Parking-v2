@@ -60,6 +60,9 @@
     <button id="checkInButton" type="button" style="display: none;">
         Check-in
     </button>
+    <button id="checkOutButton" type="button" style="display: none;">
+        Check-Out
+    </button>
     <button id="redetectButton" type="button" style="display: none;"><a href="/" style="text-decoration: none; color: white;">Re-Detect</a></button> 
 </div>
 <script>
@@ -126,6 +129,7 @@ form.addEventListener("change", async function(event) {
             document.getElementById("emergency").style.display = "block";
         }
         document.getElementById("checkInButton").style.display = "block";
+        document.getElementById("checkOutButton").style.display = "block";
         document.getElementById("redetectButton").style.display = "block";
     }
     catch (error) {
@@ -138,7 +142,67 @@ form.addEventListener("change", async function(event) {
         document.getElementById("errorMessage").textContent =
             error.message;
     }
+});
+const checkInButton = document.getElementById("checkInButton");
+checkInButton.addEventListener("click",async function ()  {
+    let plate = document.getElementById("plateNumber").textContent;
+    try{
+        if (plate == "Cannot detect or Invalid"){
+            let plate_emergency = document.getElementById("emergency").value;
+            plate = plate_emergency
+        }
+        const response = await fetch("/check-in",{
+            method : "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body : JSON.stringify({
+                plate_number : plate
+            })
+        });
+        const data = await response.json();
+        console.log(data)
+        if (data.success){
+            alert(data.message);
+        }
+        else{
+            alert(data.message);
+        }
+    }catch(error){
+        console.error("Check-in error:", error);
+        alert("Unable to process check-in.");
+    }
+});
 
+const checkOutButton = document.getElementById("checkOutButton");
+checkOutButton.addEventListener("click",async function ()  {
+    let plate = document.getElementById("plateNumber").textContent;
+    try{
+        if (plate == "Cannot detect or Invalid"){
+            let plate_emergency = document.getElementById("emergency").value;
+            plate = plate_emergency
+        }
+        const response = await fetch("/check-out",{
+            method : "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body : JSON.stringify({
+                plate_number : plate
+            })
+        });
+        const data = await response.json();
+        console.log(data)
+        if (data.success){
+            alert(data.message);
+        }
+        else{
+            alert(data.message);
+        }
+    }catch(error){
+        console.error("Check-out error:", error);
+        alert("Unable to process check-out.");
+    }
 });
 
 </script>
