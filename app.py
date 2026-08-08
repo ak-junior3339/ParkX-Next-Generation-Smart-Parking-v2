@@ -214,3 +214,17 @@ class CheckOutRequest(BaseModel):
 def check_out_vehicle(request : CheckOutRequest):
     result = check_out(request.plate_number)
     return result
+
+@app.get("/admin",response_class=HTMLResponse)
+def admin_page(request: Request):
+    return templates.TemplateResponse(
+        request, 
+        "adminLogin.html"
+    )
+
+@app.get("/admincontent",response_class=HTMLResponse)
+def adminContent(request: Request):
+    return templates.TemplateResponse(
+        request, 
+        "adminContent.html"
+    )
