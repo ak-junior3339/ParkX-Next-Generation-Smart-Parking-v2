@@ -64,4 +64,9 @@ def get_vehicle(plate_number):
         SELECT * FROM vehicles where plate_number = ?
     """,(plate_number,))
 
+    vehicle = cursor.fetchone()
+    conn.close()
+    return vehicle
+
+    
     
