@@ -5,7 +5,9 @@ from database import (
     get_vehicle,
     create_parking_entry,
     check_in,
-    check_out
+    check_out,
+    get_all_vehicles,
+    get_all_parking_records
 )
 
 
@@ -84,6 +86,34 @@ result = check_out(plate)
 print(result)
 
 
+# ==========================
+# Display Vehicles
+# ==========================
+
+print("\n--- VEHICLES DATABASE ---")
+
+vehicles = get_all_vehicles()
+
+for vehicle in vehicles:
+
+    print(
+        dict(vehicle)
+    )
+
+
+# ==========================
+# Display Parking Database
+# ==========================
+
+print("\n--- PARKING DATABASE ---")
+
+parking_records = get_all_parking_records()
+
+for record in parking_records:
+
+    print(
+        dict(record)
+    )
 
 
 # ==========================
@@ -104,3 +134,9 @@ print(result)
 
 # --- SECOND CHECK-OUT ---
 # {'success': False, 'message': 'No matching parking record found. Vehicle is not currently parked.'}
+
+# --- VEHICLES DATABASE ---
+# {'id': 1, 'plate_number': 'MP09AA1234', 'vehicle_type': 'Car'}
+
+# --- PARKING DATABASE ---
+# {'id': 1, 'vehicle_id': 1, 'check_in_time': '2026-08-08 07:57:47', 'check_out_time': '2026-08-08 07:57:47', 'status': 'COMPLETED'}
