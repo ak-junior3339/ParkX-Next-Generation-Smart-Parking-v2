@@ -9,9 +9,10 @@ import subprocess
 import sys
 import json
 import cv2
+from database import create_tables
 
 app = FastAPI(title="Smart-Park" , version="3.0")
-
+create_tables()
 
 app.add_middleware(
     CORSMiddleware,
