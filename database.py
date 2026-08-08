@@ -72,7 +72,7 @@ def get_vehicle(plate_number):
 
 def create_parking_entry(vehicle_id):
 
-    conn = get_connection()
+    conn = get_conn()
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -159,8 +159,8 @@ def check_out(plate_number):
         UPDATE parking SET check_out_time = CURRENT_TIMESTAMP,status = 'COMPLETED' where id = ?
     """,(parking_record["id"],))
 
-    conn.close()
     conn.commit()
+    conn.close()
 
     return {
         "success": True,
