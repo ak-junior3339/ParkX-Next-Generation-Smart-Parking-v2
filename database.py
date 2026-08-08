@@ -36,6 +36,8 @@ def create_tables():
             REFERENCES vehicles(id)
         )    
     """)
+
+    #closing the connection
     conn.commit()
     conn.close()
 
