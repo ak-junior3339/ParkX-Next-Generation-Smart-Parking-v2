@@ -68,5 +68,60 @@ def get_vehicle(plate_number):
     conn.close()
     return vehicle
 
+
+
+def create_parking_entry(vehicle_id):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO parking (vehicle_id)
+        VALUES (?)
+    """, (vehicle_id,))
+
+    conn.commit()
+
+    parking_id = cursor.lastrowid
+
+    conn.close()
+
+    return parking_id
     
+def check_in(plate_number):
+    conn = get_conn()
+    cursor = conn.cursor()
+
+    # Check whether vehicle already exsists or not 
+    vehicle = get_vehicle(plate_number)
+    # If vehicle does not exsist add or else get the vehicle if 
+    if vehicle is None:
+        vehicle_id = add_vehicles(plate_number)
+    else:
+        vehicle_id = vehicle["id"]
+
+    # Now check with the vehicle_id that is it already parked
+
+    cursor.execute("""
+        SELECT * FROM parking WHERE  vehicle_id = ? AND status = 'PARKED'
+    """)
+
+    active_parking = cursor.fetchone()
+    conn.close()
+
+    if active_parking:
+        return {
+            "success": False,
+            "message": "Vehicle is already checked in.",
+            "vehicle_id": vehicle_id,
+            "parking_id": active_parking["id"]
+        }
     
+
+    parking_id = create_parking_entry(vehicle_id)
+    return {
+        "success": True,
+        "message": "Vehicle checked in successfully.",
+        "vehicle_id": vehicle_id,
+        "parking_id": parking_id
+    }
