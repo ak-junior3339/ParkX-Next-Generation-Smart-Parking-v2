@@ -168,3 +168,29 @@ def check_out(plate_number):
         "vehicle_id": vehicle_id,
         "parking_id": parking_record["id"]
     }
+
+# Getting all vehicle information 
+def get_all_vehicles():
+    conn = get_conn()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT * FROM vehicles
+    """)
+
+    vehicles = cursor.fetchall()
+    conn.close()
+
+    return vehicles
+
+
+# Getting all parking records 
+def get_all_parking_records():
+    conn = get_conn()
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT * FROM parking
+    """)
+    parking_record = cursor.fetchall()
+    conn.close()
+    return parking_record
