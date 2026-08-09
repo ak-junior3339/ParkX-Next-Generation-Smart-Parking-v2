@@ -2,14 +2,14 @@ from fastapi import FastAPI,Request,UploadFile,File,HTTPException,status
 import os
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse,RedirectResponse
 from fastapi.staticfiles import StaticFiles 
 import filetype
 import subprocess
 import sys
 import json
 import cv2
-from database import create_tables , check_in , check_out , get_all_vehicles , get_all_parking_records
+from database import create_tables , check_in , check_out , get_all_vehicles , get_all_parking_records,get_all_stats
 from pydantic import BaseModel
 
 app = FastAPI(title="Smart-Park" , version="3.0")
@@ -200,6 +200,8 @@ async def upload_file(file: UploadFile = File(...)):
     result = await detect_image(file_path)
     return result
 
+
+
 class CheckInRequest(BaseModel):
     plate_number:str
 
@@ -224,6 +226,7 @@ def admin_page(request: Request):
 
 @app.get("/admincontent",response_class=HTMLResponse)
 def adminContent(request: Request):
+
     return templates.TemplateResponse(
         request, 
         "adminContent.html"
@@ -242,3 +245,8 @@ def get_parking_data():
         dict(parking)
         for parking in get_all_parking_records()
     ]
+
+@app.get("/dashstats")
+def get_stats():
+    stats = get_all_stats()
+    return stats
