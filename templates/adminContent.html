@@ -17,8 +17,81 @@
         <h2 style="color: black;font-size: 30px;"> 👨🏻‍💻 ADMINISTRATOR PANEL 👨🏻‍💻</h2>
     </header>
 </div>
+<div class="vehicle-table-container" >
+    <h2 style="color: black;font-size: 30px;">Vehicle Database</h2>
+    <table id="vehicleTable">
+        <thead>
+            <tr><th>ID</th><th>NUMBER PLATE</th><th>VEHICLE TYPE</th></tr>
+        </thead>
+        <tbody id="vehicleBody">
+            
+        </tbody>
+    </table>
+</div>
+<div class="vehicle-table-container">
+    <h2 style="color: black;font-size: 30px;">Parking Database</h2>
+    <table id="parkingTable">
+        <thead>
+            <tr><th>ID</th><th>VEHICLE ID</th><th>CHECK-IN-TIME</th><th>CHECK-OUT-TIME</th><th>STATUS</th></tr>
+        </thead>
+        <tbody id="parkingBody">
+            
+        </tbody>
+    </table>
+</div>
 <script>
-   
+    window.addEventListener("DOMContentLoaded", async function () {
+        const Vbody = document.getElementById("vehicleBody");
+        
+        try {
+            const responseV = await fetch("/vehicleData", {
+                method: "GET"
+            });
+            
+            const dataV = await responseV.json();
+            
+            dataV.forEach(vehicle => {
+                const trElement = document.createElement("tr");
+                
+                trElement.innerHTML = `
+                    <td>${vehicle.id}</td>
+                    <td>${vehicle.plate_number}</td>
+                    <td>${vehicle.vehicle_type}</td>
+                `;
+                
+                Vbody.appendChild(trElement);
+            });
+        } catch (error) {
+            console.error("Error fetching vehicle data:", error);
+        }
+    });
+    window.addEventListener("DOMContentLoaded", async function () {
+        const Pbody = document.getElementById("parkingBody");
+        
+        try {
+            const responseP = await fetch("/parkingData", {
+                method: "GET"
+            });
+            
+            const dataP = await responseP.json();
+            
+            dataP.forEach(parking => {
+                const trElement = document.createElement("tr");
+                
+                trElement.innerHTML = `
+                    <td>${parking.id}</td>
+                    <td>${parking.vehicle_id}</td>
+                    <td>${parking.check_in_time}</td>
+                    <td>${parking.check_out_time}</td>
+                    <td>${parking.status}</td>
+                `;
+                
+                Pbody.appendChild(trElement);
+            });
+        } catch (error) {
+            console.error("Error fetching vehicle data:", error);
+        }
+    });
 </script>
 </body>
 </html>
