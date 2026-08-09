@@ -232,12 +232,6 @@ async def admin_login(password: str = Form(...)):
         "message": "Incorrect password."
     }
 
-# @app.get("/admin",response_class=HTMLResponse)
-# def admin_page(request: Request):
-#     return templates.TemplateResponse(
-#         request, 
-#         "adminContent.html"
-#     )
 
 @app.get("/admincontent",response_class=HTMLResponse)
 def adminContent(request: Request):
