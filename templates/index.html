@@ -167,7 +167,7 @@ checkInButton.addEventListener("click",async function ()  {
         const data = await response.json();
         console.log(data)
         if (data.success){
-            alert(data.message);
+            alert(data.message+" For "+data.plate);
         }
         else{
             alert(data.message);
@@ -198,7 +198,7 @@ checkOutButton.addEventListener("click",async function ()  {
         const data = await response.json();
         console.log(data)
         if (data.success){
-            alert(data.message);
+            alert(data.message + " for "+data.pNumber);
         }
         else{
             alert(data.message);
