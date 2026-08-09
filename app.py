@@ -9,7 +9,7 @@ import subprocess
 import sys
 import json
 import cv2
-from database import create_tables , check_in , check_out
+from database import create_tables , check_in , check_out , get_all_vehicles , get_all_parking_records
 from pydantic import BaseModel
 
 app = FastAPI(title="Smart-Park" , version="3.0")
@@ -228,3 +228,17 @@ def adminContent(request: Request):
         request, 
         "adminContent.html"
     )
+
+@app.get("/vehicleData")
+def get_vehicle_data():
+    return [
+        dict(vehicle)
+        for vehicle in get_all_vehicles()
+    ]
+
+@app.get("/parkingData")
+def get_parking_data():
+    return [
+        dict(parking)
+        for parking in get_all_parking_records()
+    ]
