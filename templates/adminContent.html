@@ -17,122 +17,305 @@
         <h2 style="color: black;font-size: 30px;"> 👨🏻‍💻 ADMINISTRATOR PANEL 👨🏻‍💻</h2>
     </header>
 </div>
-<div class="dashboard-stats">
+<div id="adminLogin" class="admin-login">
 
-    <div class="stat-card">
-        <div class="stat-title">Total Vehicles</div>
-        <div class="stat-value" id="totalVehicles">0</div>
-    </div>
+    <div class="login-card">
 
-    <div class="stat-card">
-        <div class="stat-title">Currently Parked</div>
-        <div class="stat-value" id="currentlyParked">0</div>
-    </div>
+        <h2>Admin Access</h2>
 
-    <div class="stat-card">
-        <div class="stat-title">Available Slots</div>
-        <div class="stat-value" id="availableVehicles">0</div>
-    </div>
+        <p>Enter the administrator password</p>
 
-    <div class="stat-card">
-        <div class="stat-title">Today's Check-ins</div>
-        <div class="stat-value" id="todayCheckins">0</div>
+        <input
+            type="password"
+            id="adminPassword"
+            placeholder="Enter password"
+        >
+
+        <button
+            type="button"
+            id="adminLoginButton"
+        >
+            Continue
+        </button>
+
+        <p id="loginError"></p>
+
     </div>
 
 </div>
-<div class="vehicle-table-container" >
-    <h2 style="color: black;font-size: 30px;">Vehicle Database</h2>
-    <table id="vehicleTable">
-        <thead>
-            <tr><th>ID</th><th>NUMBER PLATE</th><th>VEHICLE TYPE</th></tr>
-        </thead>
-        <tbody id="vehicleBody">
-            
-        </tbody>
-    </table>
-</div>
-<div class="vehicle-table-container">
-    <h2 style="color: black;font-size: 30px;">Parking Database</h2>
-    <table id="parkingTable">
-        <thead>
-            <tr><th>ID</th><th>VEHICLE ID</th><th>CHECK-IN-TIME</th><th>CHECK-OUT-TIME</th><th>STATUS</th></tr>
-        </thead>
-        <tbody id="parkingBody">
-            
-        </tbody>
-    </table>
+<div id="adminDashboard" style="display: none;">
+    <div class="dashboard-stats">
+
+        <div class="stat-card">
+            <div class="stat-title">Total Vehicles</div>
+            <div class="stat-value" id="totalVehicles">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-title">Currently Parked</div>
+            <div class="stat-value" id="currentlyParked">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-title">Available Slots</div>
+            <div class="stat-value" id="availableVehicles">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-title">Today's Check-ins</div>
+            <div class="stat-value" id="todayCheckins">0</div>
+        </div>
+
+    </div>
+    <div class="vehicle-table-container" >
+        <h2 style="color: black;font-size: 30px;">Vehicle Database</h2>
+        <table id="vehicleTable">
+            <thead>
+                <tr><th>ID</th><th>NUMBER PLATE</th><th>VEHICLE TYPE</th></tr>
+            </thead>
+            <tbody id="vehicleBody">
+                
+            </tbody>
+        </table>
+    </div>
+    <div class="vehicle-table-container">
+        <h2 style="color: black;font-size: 30px;">Parking Database</h2>
+        <table id="parkingTable">
+            <thead>
+                <tr><th>ID</th><th>VEHICLE ID</th><th>CHECK-IN-TIME</th><th>CHECK-OUT-TIME</th><th>STATUS</th></tr>
+            </thead>
+            <tbody id="parkingBody">
+                
+            </tbody>
+        </table>
+    </div>
 </div>
 <script>
-    window.addEventListener("DOMContentLoaded", async function () {
-        const Vbody = document.getElementById("vehicleBody");
+    const adminLoginButton = document.getElementById("adminLoginButton");
+
+adminLoginButton.addEventListener("click", async function () {
+
+    const password = document.getElementById("adminPassword").value;
+
+    if (!password) {
+        document.getElementById("loginError").textContent =
+            "Please enter the password.";
+        return;
+    }
+
+    try {
+
+        const formData = new FormData();
+
+        formData.append("password", password);
+
+        const response = await fetch("/admin-login", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+
+            // Hide login
+            document.getElementById("adminLogin").style.display = "none";
+
+            // Show dashboard
+            document.getElementById("adminDashboard").style.display = "block";
+
+            // Load dashboard Data
+            loadDashboardData();
+
+        } else {
+
+            document.getElementById("loginError").textContent =
+                data.message;
+
+        }
+
+    } catch (error) {
+
+        console.error("Login error:", error);
+
+        document.getElementById("loginError").textContent =
+            "Unable to verify password.";
+
+    }
+
+});
+async function loadDashboardData() {
+
+    // ==========================
+    // Vehicle Data
+    // ==========================
+
+    const Vbody = document.getElementById("vehicleBody");
+
+    try {
+
+        const responseV = await fetch("/vehicleData", {
+            method: "GET"
+        });
+
+        const dataV = await responseV.json();
+
+        dataV.forEach(vehicle => {
+
+            const trElement = document.createElement("tr");
+
+            trElement.innerHTML = `
+                <td>${vehicle.id}</td>
+                <td>${vehicle.plate_number}</td>
+                <td>${vehicle.vehicle_type}</td>
+            `;
+
+            Vbody.appendChild(trElement);
+        });
+
+    } catch (error) {
+
+        console.error("Error fetching vehicle data:", error);
+
+    }
+
+
+    // ==========================
+    // Parking Data
+    // ==========================
+
+    const Pbody = document.getElementById("parkingBody");
+
+    try {
+
+        const responseP = await fetch("/parkingData", {
+            method: "GET"
+        });
+
+        const dataP = await responseP.json();
+
+        dataP.forEach(parking => {
+
+            const trElement = document.createElement("tr");
+
+            trElement.innerHTML = `
+                <td>${parking.id}</td>
+                <td>${parking.vehicle_id}</td>
+                <td>${parking.check_in_time}</td>
+                <td>${parking.check_out_time}</td>
+                <td>${parking.status}</td>
+            `;
+
+            Pbody.appendChild(trElement);
+        });
+
+    } catch (error) {
+
+        console.error("Error fetching parking data:", error);
+
+    }
+
+
+    // ==========================
+    // Dashboard Statistics
+    // ==========================
+
+    try {
+
+        const Dresponse = await fetch("/dashstats", {
+            method: "GET"
+        });
+
+        const data = await Dresponse.json();
+
+        document.getElementById("totalVehicles").textContent =
+            data.total_vehicles;
+
+        document.getElementById("currentlyParked").textContent =
+            data.currently_parked;
+
+        document.getElementById("availableVehicles").textContent =
+            data.available;
+
+        document.getElementById("todayCheckins").textContent =
+            data.today_checkins;
+
+    } catch (error) {
+
+        console.error("Error fetching dashboard stats:", error);
+
+    }
+}
+    // window.addEventListener("DOMContentLoaded", async function () {
+    //     const Vbody = document.getElementById("vehicleBody");
         
-        try {
-            const responseV = await fetch("/vehicleData", {
-                method: "GET"
-            });
+    //     try {
+    //         const responseV = await fetch("/vehicleData", {
+    //             method: "GET"
+    //         });
             
-            const dataV = await responseV.json();
+    //         const dataV = await responseV.json();
             
-            dataV.forEach(vehicle => {
-                const trElement = document.createElement("tr");
+    //         dataV.forEach(vehicle => {
+    //             const trElement = document.createElement("tr");
                 
-                trElement.innerHTML = `
-                    <td>${vehicle.id}</td>
-                    <td>${vehicle.plate_number}</td>
-                    <td>${vehicle.vehicle_type}</td>
-                `;
+    //             trElement.innerHTML = `
+    //                 <td>${vehicle.id}</td>
+    //                 <td>${vehicle.plate_number}</td>
+    //                 <td>${vehicle.vehicle_type}</td>
+    //             `;
                 
-                Vbody.appendChild(trElement);
-            });
-        } catch (error) {
-            console.error("Error fetching vehicle data:", error);
-        }
-    });
-    window.addEventListener("DOMContentLoaded", async function () {
-        const Pbody = document.getElementById("parkingBody");
+    //             Vbody.appendChild(trElement);
+    //         });
+    //     } catch (error) {
+    //         console.error("Error fetching vehicle data:", error);
+    //     }
+    // });
+    // window.addEventListener("DOMContentLoaded", async function () {
+    //     const Pbody = document.getElementById("parkingBody");
         
-        try {
-            const responseP = await fetch("/parkingData", {
-                method: "GET"
-            });
+    //     try {
+    //         const responseP = await fetch("/parkingData", {
+    //             method: "GET"
+    //         });
             
-            const dataP = await responseP.json();
+    //         const dataP = await responseP.json();
             
-            dataP.forEach(parking => {
-                const trElement = document.createElement("tr");
+    //         dataP.forEach(parking => {
+    //             const trElement = document.createElement("tr");
                 
-                trElement.innerHTML = `
-                    <td>${parking.id}</td>
-                    <td>${parking.vehicle_id}</td>
-                    <td>${parking.check_in_time}</td>
-                    <td>${parking.check_out_time}</td>
-                    <td>${parking.status}</td>
-                `;
+    //             trElement.innerHTML = `
+    //                 <td>${parking.id}</td>
+    //                 <td>${parking.vehicle_id}</td>
+    //                 <td>${parking.check_in_time}</td>
+    //                 <td>${parking.check_out_time}</td>
+    //                 <td>${parking.status}</td>
+    //             `;
                 
-                Pbody.appendChild(trElement);
-            });
-        } catch (error) {
-            console.error("Error fetching vehicle data:", error);
-        }
-    });
-    window.addEventListener("DOMContentLoaded", async function () {
-        try {
-            const Dresponse = await fetch("/dashstats", {
-                method: "GET"
-            });
+    //             Pbody.appendChild(trElement);
+    //         });
+    //     } catch (error) {
+    //         console.error("Error fetching vehicle data:", error);
+    //     }
+    // });
+    // window.addEventListener("DOMContentLoaded", async function () {
+    //     try {
+    //         const Dresponse = await fetch("/dashstats", {
+    //             method: "GET"
+    //         });
             
-            const data = await Dresponse.json();
-            document.getElementById("totalVehicles").textContent =data.total_vehicles;
+    //         const data = await Dresponse.json();
+    //         document.getElementById("totalVehicles").textContent =data.total_vehicles;
 
-            document.getElementById("currentlyParked").textContent = data.currently_parked
+    //         document.getElementById("currentlyParked").textContent = data.currently_parked
 
-            document.getElementById("availableVehicles").textContent = data.available
+    //         document.getElementById("availableVehicles").textContent = data.available
 
-            document.getElementById("todayCheckins").textContent = data.today_checkins
-        } catch (error) {
-            console.error("Error fetching vehicle data:", error);
-        }
-    });
+    //         document.getElementById("todayCheckins").textContent = data.today_checkins
+    //     } catch (error) {
+    //         console.error("Error fetching vehicle data:", error);
+    //     }
+    // });
 </script>
 </body>
 </html>
