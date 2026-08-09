@@ -1,5 +1,6 @@
 from fastapi import FastAPI,Request,UploadFile,File,HTTPException,status
 import os
+from fastapi import Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse,RedirectResponse
@@ -14,7 +15,7 @@ from pydantic import BaseModel
 
 app = FastAPI(title="Smart-Park" , version="3.0")
 create_tables()
-
+ADMIN_PASSWORD = "Admin1234"
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -217,12 +218,26 @@ def check_out_vehicle(request : CheckOutRequest):
     result = check_out(request.plate_number)
     return result
 
-@app.get("/admin",response_class=HTMLResponse)
-def admin_page(request: Request):
-    return templates.TemplateResponse(
-        request, 
-        "adminLogin.html"
-    )
+@app.post("/admin-login")
+async def admin_login(password: str = Form(...)):
+
+    if password == ADMIN_PASSWORD:
+        return {
+            "success": True,
+            "message": "Access granted."
+        }
+
+    return {
+        "success": False,
+        "message": "Incorrect password."
+    }
+
+# @app.get("/admin",response_class=HTMLResponse)
+# def admin_page(request: Request):
+#     return templates.TemplateResponse(
+#         request, 
+#         "adminContent.html"
+#     )
 
 @app.get("/admincontent",response_class=HTMLResponse)
 def adminContent(request: Request):
