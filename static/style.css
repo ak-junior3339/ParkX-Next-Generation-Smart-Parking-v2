@@ -542,3 +542,107 @@ select {
 
     line-height: 1;
 }
+
+
+.admin-login {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+
+    padding: 40px;
+
+    background: #000000;
+
+    border: 1px solid #D85A30;
+    border-radius: 18px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.25);
+
+    animation: loginFadeIn 0.5s ease;
+}
+
+.login-card h2 {
+    margin: 0 0 10px;
+
+    font-size: 28px;
+    font-weight: 800;
+
+    color: #ffffff;
+}
+
+.login-card p {
+    margin: 0 0 25px;
+
+    color: #819A91;
+    font-size: 15px;
+}
+
+#adminPassword {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    margin: 0;
+
+    border: 1px solid #819A91;
+    border-radius: 12px;
+
+    background: #15191b;
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    outline: none;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#adminPassword::placeholder {
+    color: #777777;
+}
+
+#adminPassword:focus {
+    border-color: #D85A30;
+
+    box-shadow:
+        0 0 0 3px rgba(216, 90, 48, 0.15);
+}
+
+#loginError {
+    margin-top: 15px;
+    margin-bottom: 0;
+
+    color: #ff6b6b;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+@keyframes loginFadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
