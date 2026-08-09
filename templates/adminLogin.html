@@ -24,10 +24,6 @@
     // HardCoded Password
     const pass = "Admin1234";
     const auth = document.getElementById("authButton");
-    // async function loadData() {
-    //     let response = await fetch("/admincontent");
-    //     let data = await response.json();
-    // }
     auth.addEventListener("click",async function ()  {
         let passwd = document.getElementById("pass").value;
         if (passwd == pass){
