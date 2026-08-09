@@ -123,9 +123,10 @@ def check_in(plate_number):
     parking_id = create_parking_entry(vehicle_id)
     return {
         "success": True,
-        "message": "Vehicle checked in successfully.",
+        "message": "Vehicle check in successfull",
         "vehicle_id": vehicle_id,
-        "parking_id": parking_id
+        "parking_id": parking_id,
+        "plate" : plate_number
     }
 
 # Function for checking out the vehicle
@@ -164,9 +165,10 @@ def check_out(plate_number):
 
     return {
         "success": True,
-        "message": "Vehicle checked out successfully.",
+        "message": "Vehicle check out successfull ",
         "vehicle_id": vehicle_id,
-        "parking_id": parking_record["id"]
+        "parking_id": parking_record["id"],
+        "pNumber" : plate_number
     }
 
 # Getting all vehicle information 
