@@ -196,3 +196,39 @@ def get_all_parking_records():
     parking_record = cursor.fetchall()
     conn.close()
     return parking_record
+
+def get_all_stats():
+    conn = get_conn()
+    cursor = conn.cursor()
+    ## Query to get total vehicles 
+    cursor.execute("""
+        SELECT COUNT(*) FROM vehicles
+    """)
+    total_vehicles = cursor.fetchone()[0]
+
+    ## Query for Currently parked
+    cursor.execute("""
+        SELECT COUNT(*) FROM parking WHERE status = 'PARKED'
+    """)
+    curr_park = cursor.fetchone()[0]
+
+    ## Available Parking 
+    PARKING_CAPACITY = 100
+    available = PARKING_CAPACITY - curr_park
+
+    # Today's check-ins
+    cursor.execute("""
+        SELECT COUNT(*)
+        FROM parking
+        WHERE DATE(check_in_time) = DATE('now')
+    """)
+    today_checkins = cursor.fetchone()[0]
+
+    conn.close()
+
+    return {
+        "total_vehicles": total_vehicles,
+        "currently_parked": curr_park,
+        "available": available,
+        "today_checkins": today_checkins
+    }
