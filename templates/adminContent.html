@@ -17,6 +17,29 @@
         <h2 style="color: black;font-size: 30px;"> 👨🏻‍💻 ADMINISTRATOR PANEL 👨🏻‍💻</h2>
     </header>
 </div>
+<div class="dashboard-stats">
+
+    <div class="stat-card">
+        <div class="stat-title">Total Vehicles</div>
+        <div class="stat-value" id="totalVehicles">0</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-title">Currently Parked</div>
+        <div class="stat-value" id="currentlyParked">0</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-title">Available Slots</div>
+        <div class="stat-value" id="availableVehicles">0</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-title">Today's Check-ins</div>
+        <div class="stat-value" id="todayCheckins">0</div>
+    </div>
+
+</div>
 <div class="vehicle-table-container" >
     <h2 style="color: black;font-size: 30px;">Vehicle Database</h2>
     <table id="vehicleTable">
@@ -88,6 +111,24 @@
                 
                 Pbody.appendChild(trElement);
             });
+        } catch (error) {
+            console.error("Error fetching vehicle data:", error);
+        }
+    });
+    window.addEventListener("DOMContentLoaded", async function () {
+        try {
+            const Dresponse = await fetch("/dashstats", {
+                method: "GET"
+            });
+            
+            const data = await Dresponse.json();
+            document.getElementById("totalVehicles").textContent =data.total_vehicles;
+
+            document.getElementById("currentlyParked").textContent = data.currently_parked
+
+            document.getElementById("availableVehicles").textContent = data.available
+
+            document.getElementById("todayCheckins").textContent = data.today_checkins
         } catch (error) {
             console.error("Error fetching vehicle data:", error);
         }
