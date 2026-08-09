@@ -371,8 +371,110 @@ select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239FE1CB'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239FE1CB'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); */
   background-repeat: no-repeat;
   background-position: right 16px center;
   background-size: 16px;
+}
+
+
+.vehicle-table-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;
+    overflow-x: auto;
+}
+
+#vehicleTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Table Header */
+#vehicleTable thead {
+    background-color: #D85A30;
+    color: #ffffff;
+}
+
+#vehicleTable th {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+}
+
+/* Table Body */
+#vehicleTable td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #eeeeee;
+    color: #333333;
+    font-size: 0.95rem;
+}
+
+/* Alternate rows */
+#vehicleTable tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Hover effect */
+#vehicleTable tbody tr:hover {
+    background-color: #fff3ef;
+    transition: background-color 0.2s ease;
+}
+
+/* Remove border from last row */
+#vehicleTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#parkingTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Table Header */
+#parkingTable thead {
+    background-color: #D85A30;
+    color: #ffffff;
+}
+
+#parkingTable th {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+}
+
+/* Table Body */
+#parkingTable td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #eeeeee;
+    color: #333333;
+    font-size: 0.95rem;
+}
+
+/* Alternate rows */
+#parkingTable tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Hover effect */
+#parkingTable tbody tr:hover {
+    background-color: #fff3ef;
+    transition: background-color 0.2s ease;
+}
+
+/* Remove border from last row */
+#parkingTable tbody tr:last-child td {
+    border-bottom: none;
 }
