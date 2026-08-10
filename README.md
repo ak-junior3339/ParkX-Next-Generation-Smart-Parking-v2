@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🅿️ ParkX — Next-Generation Smart Parking System v2
+#  ParkX — Next-Generation Smart Parking System v2
 
 **AI-powered Automatic Number Plate Recognition (ANPR) for real-time, contactless vehicle check-in and check-out.**
 
@@ -19,7 +19,7 @@ Built for malls, airports, corporate campuses, and gated communities.
 
 ---
 
-## 📖 Overview
+##  Overview
 
 **ParkX** is a full-stack, AI-driven smart parking management system that automates vehicle entry and exit using **computer vision** and **optical character recognition** — no manual number plate entry, no barcodes, no RFID cards required.
 
@@ -35,9 +35,9 @@ This is **Version 2** of the project — evolved from a manually-triggered detec
 
 ---
 
-## 🎥 Demo
+##  Demo
 
-![ParkX-Demo](ParkX-Demo.gif)
+![ParkX-Demo](screenshots/ParkX-Demo.gif)
 ![ParkX](screenshots/I1.png)
 ![ParkX](screenshots/I2.png)
 ![ParkX](screenshots/I3.png)
@@ -49,21 +49,21 @@ This is **Version 2** of the project — evolved from a manually-triggered detec
 
 ---
 
-## ✨ Features
+##  Features
 
-### 🚘 Vehicle Detection & Recognition
+###  Vehicle Detection & Recognition
 - **Custom-trained YOLOv8 model** for license plate localization — trained specifically for this use case rather than relying on a generic object detector.
 - **PaddleOCR-based text extraction** from the cropped plate region.
 - **Post-processing validation engine**: strips whitespace/separators, removes stray `IND`/country prefixes, and regex-validates the result against the standard Indian plate format (`SS DD LLL DDDD`), cross-checked against a full list of valid RTO **state codes**.
 - Automatically flags unreadable/invalid plates as `Cannot detect or Invalid` instead of silently trusting bad OCR output — with a manual fallback entry field on the frontend so an operator can still check a vehicle in/out.
 - Annotated output image generated with **OpenCV**, drawing the bounding box and recognized plate number directly on the photo for visual confirmation.
 
-### 🖥️ Decoupled, Production-Minded CV Pipeline
+###  Decoupled, Production-Minded CV Pipeline
 - Detection (**PyTorch/Ultralytics**) and OCR (**PaddlePaddle**) run in **isolated subprocesses**, deliberately avoiding the well-known runtime/CUDA-context conflicts between the two deep learning frameworks when loaded in the same process.
 - Intermediate results (bounding box, recognized text, confidence score) are passed between stages via structured JSON files, making each stage independently testable and swappable.
 - Confidence scores are captured and surfaced end-to-end from OCR to the API response.
 
-### 🌐 Backend (FastAPI)
+###  Backend (FastAPI)
 - Clean **REST API** built on FastAPI with Pydantic request models.
 - **Two-layer file upload security**:
   1. Client-declared MIME type validation.
@@ -72,7 +72,7 @@ This is **Version 2** of the project — evolved from a manually-triggered detec
 - Static file serving for both the frontend assets and the generated annotated output images.
 - CORS-enabled for flexible frontend integration.
 
-### 🗄️ Database & Business Logic
+###  Database & Business Logic
 - **SQLite** persistence layer with a clean relational schema:
   - `vehicles` — unique plate registry with vehicle type.
   - `parking` — one row per parking session, linked by foreign key, tracking `check_in_time`, `check_out_time`, and live `status` (`PARKED` / `COMPLETED`).
@@ -80,13 +80,13 @@ This is **Version 2** of the project — evolved from a manually-triggered detec
 - **Safe check-out logic** — validates an active parking session exists before closing it out.
 - Live aggregate statistics computed on demand: total registered vehicles, currently parked count, available capacity, and today's check-ins.
 
-### 🛡️ Admin Dashboard
+###  Admin Dashboard
 - Password-gated **admin panel** with a dedicated login screen.
 - **Real-time stat cards**: Total Vehicles, Currently Parked, Available Slots, Today's Check-ins.
 - Full **Vehicle Database** and **Parking Records** tables rendered live from the API.
 - Clean navigation back to the public-facing kiosk view.
 
-### 🎨 Frontend Experience
+###  Frontend Experience
 - Zero-framework, dependency-free **vanilla JS + HTML/CSS** kiosk interface — fast, lightweight, easy to deploy on low-power edge devices at a gate/boom-barrier.
 - Custom-designed **scanning animation** (number-plate-styled loader with an animated scan line) while detection runs.
 - Fully responsive result view: annotated image, recognized plate, OCR confidence %, and one-tap Check-In / Check-Out actions.
@@ -97,7 +97,7 @@ This is **Version 2** of the project — evolved from a manually-triggered detec
 
 ---
 
-## 🧰 Tech Stack
+##  Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -112,7 +112,7 @@ This is **Version 2** of the project — evolved from a manually-triggered detec
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 ParkX/
@@ -137,7 +137,7 @@ ParkX/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Python 3.12
@@ -165,7 +165,7 @@ Then visit **http://localhost:8000** for the Single Purpose UI, and **http://loc
 
 ---
 
-## 📡 API Reference
+##  API Reference
 
 | Method | Endpoint | Description |
 |---|---|---|
@@ -182,21 +182,21 @@ Then visit **http://localhost:8000** for the Single Purpose UI, and **http://loc
 
 ---
 
-## 🗺️ Roadmap / Future Scope
+##  Roadmap / Future Scope
 
 The current build is a fully working, self-contained ANPR parking pipeline. Planned upgrades to move it toward a production-grade, revenue-ready system:
 
-- 💳 **Automated Payment & FASTag Integration** — calculate parking cost dynamically based on `check_in_time`/`check_out_time` duration and a configurable rate card, and settle it automatically via **FASTag / UPI / payment gateway** at exit, removing manual cash handling entirely.
-- 🅿️ **Slot-Level Allocation** — extend the schema with a `slots` table so each check-in is mapped to a specific, trackable parking bay (`A-12`, `B-04`, etc.), enabling slot-wise availability and guided navigation to an open spot.
-- 🔍 **Admin Search & Filtering** — add a search bar and filters (by plate, date range, status, vehicle type) to the admin dashboard tables for faster lookups at scale.
-- 🔐 **Stronger Auth** — replace the static admin password with hashed credentials + JWT/session-based auth and role-based access.
-- 📷 **Live Camera Feed Integration** — move from manual image upload to a live RTSP/webcam feed at the boom barrier for a true contactless flow.
-- 🌍 **Multi-format Plate Support** — extend regex/state-code validation beyond Indian plates for international deployments.
-- 🚫 **Blacklist/Whitelist Lists** — flag stolen/unauthorized vehicles automatically at entry.
+-  **Automated Payment & FASTag Integration** — calculate parking cost dynamically based on `check_in_time`/`check_out_time` duration and a configurable rate card, and settle it automatically via **FASTag / UPI / payment gateway** at exit, removing manual cash handling entirely.
+-  **Slot-Level Allocation** — extend the schema with a `slots` table so each check-in is mapped to a specific, trackable parking bay (`A-12`, `B-04`, etc.), enabling slot-wise availability and guided navigation to an open spot.
+-  **Admin Search & Filtering** — add a search bar and filters (by plate, date range, status, vehicle type) to the admin dashboard tables for faster lookups at scale.
+-  **Stronger Auth** — replace the static admin password with hashed credentials + JWT/session-based auth and role-based access.
+-  **Live Camera Feed Integration** — move from manual image upload to a live RTSP/webcam feed at the boom barrier for a true contactless flow.
+-  **Multi-format Plate Support** — extend regex/state-code validation beyond Indian plates for international deployments.
+-  **Blacklist/Whitelist Lists** — flag stolen/unauthorized vehicles automatically at entry.
 
 ---
 
-## 🧠 What This Project Demonstrates
+## What This Project Demonstrates
 
 - End-to-end ML systems engineering: taking a **custom-trained YOLOv8 model** from notebook experimentation to a production FastAPI service.
 - Practical handling of a real-world multi-framework conflict (PyTorch + PaddlePaddle) via process isolation — not just "it works on my machine."
@@ -206,7 +206,7 @@ The current build is a fully working, self-contained ANPR parking pipeline. Plan
 
 ---
 
-## 👤 Author
+##  Author
 
 **Aishwarya Kumar Singh**
 
