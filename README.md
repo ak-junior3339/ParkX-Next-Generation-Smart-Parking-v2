@@ -13,7 +13,7 @@ Built for malls, airports, corporate campuses, and gated communities.
 [![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](#license)
 
-[Demo](#-demo) • [Features](#-features) • [Architecture](#-system-architecture) • [Tech Stack](#-tech-stack) • [Setup](#-getting-started) • [API](#-api-reference) • [Roadmap](#-roadmap--future-scope)
+[Demo](#-demo) • [Features](#-features) •  [Tech Stack](#-tech-stack) • [Setup](#-getting-started) • [API](#-api-reference) 
 
 </div>
 
@@ -37,24 +37,10 @@ This is **Version 2** of the project — evolved from a manually-triggered detec
 
 ## 🎥 Demo
 
-> 📌 *Add your project demo here — this is one of the first things a recruiter looks at.*
 
-| | |
-|---|---|
-| 🖼️ **Screenshots** | Add screenshots to a `/screenshots` folder and embed them below |
-| 🎬 **Demo GIF** | A 10–15 sec looping GIF at the top of the README (upload flow → detection → check-in) gets seen *without a click* — highest impact per second of effort |
-| ▶️ **Full walkthrough video** | Record a 60–90 sec screen capture (upload → detection → check-in → admin login → dashboard → check-out), upload to YouTube (unlisted is fine) or Loom, and link it below |
+![ParkX Demo](screenshots/ParkX-Demo.gif)
 
-```markdown
-<!-- Example once you have assets -->
-![ParkX Demo](./screenshots/demo.gif)
 
-| Home / Upload | Detection Result | Admin Dashboard |
-|---|---|---|
-| ![Home](./screenshots/home.png) | ![Result](./screenshots/result.png) | ![Admin](./screenshots/admin.png) |
-
-📺 **[Watch the full demo video](https://your-video-link-here)**
-```
 
 ---
 
@@ -101,28 +87,6 @@ This is **Version 2** of the project — evolved from a manually-triggered detec
 - Fully responsive result view: annotated image, recognized plate, OCR confidence %, and one-tap Check-In / Check-Out actions.
 - Graceful manual-entry fallback when a plate can't be confidently read.
 
----
-
-## 🏗️ System Architecture
-
-```mermaid
-flowchart TD
-    A[📷 User Uploads Vehicle Image] --> B["FastAPI /file Endpoint"]
-    B --> C{File Validation<br/>MIME + Binary Sniff + Size Limit}
-    C -- Invalid --> Z[❌ HTTP 415 / 413 Rejected]
-    C -- Valid --> D["Subprocess: detector.py<br/>YOLOv8 Plate Detection"]
-    D --> E["Temp/bbox.json + Temp/plate.jpg"]
-    E --> F["Subprocess: ocr_engine.py<br/>PaddleOCR Text Recognition"]
-    F --> G["Regex + State-Code Validation"]
-    G --> H["Temp/result.json"]
-    H --> I["OpenCV: Draw BBox + Plate Text"]
-    I --> J["Output-img/output.jpg"]
-    J --> K["JSON Response to Frontend"]
-    K --> L{User Action}
-    L -- Check-In --> M[("SQLite: vehicles + parking tables")]
-    L -- Check-Out --> M
-    M --> N["Admin Dashboard<br/>Live Stats + Tables"]
-```
 
 **Why subprocesses?** YOLO (PyTorch) and PaddleOCR (PaddlePaddle) each initialize their own low-level runtime/device context. Running them in-process back-to-back in the same Python interpreter is a common source of memory conflicts and crashes. ParkX sidesteps this entirely by running each model as its own subprocess and communicating through JSON hand-off files — a small architectural decision that meaningfully improves reliability.
 
