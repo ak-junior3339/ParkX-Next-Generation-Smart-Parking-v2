@@ -37,7 +37,6 @@ This is **Version 2** of the project — evolved from a manually-triggered detec
 
 ##  Demo
 
-![ParkX-Demo](screenshots/ParkX-Demo.gif)
 ![ParkX](screenshots/I1.png)
 ![ParkX](screenshots/I2.png)
 ![ParkX](screenshots/I3.png)
