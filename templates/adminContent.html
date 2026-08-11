@@ -181,6 +181,33 @@ srch.addEventListener("click", async function () {
     document.getElementById("src").style.display = "none";
     document.getElementById("searchbody").style.display = "block";
 
+    const number = document.getElementById("searchedPlate").value;
+    if (!number) {
+        alert("Please enter a Car regestration Number !")
+        return;
+    }
+    try {
+        const formData = new FormData();
+        formData.append("Plate",number)
+        const response = await fetch("/admin-search", {
+            method: "POST",
+            body: formData
+        });
+        const data = await response.json();
+        if (data.success) {
+            
+        } else {
+
+            alert("No Records Found !")
+
+        }
+
+    } catch (error) {
+
+        console.error("Login error:", error);
+    }
+    
+
 
 });
 const bck = document.getElementById("bck")
