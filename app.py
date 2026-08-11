@@ -260,6 +260,7 @@ def get_stats():
     stats = get_all_stats()
     return stats
 
+## Adding search feature route for backend
 @app.post("/admin-search")
 async def admin_search(plate: str = Form(...)):
     records = get_admin_search(plate)
