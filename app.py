@@ -10,7 +10,7 @@ import subprocess
 import sys
 import json
 import cv2
-from database import create_tables , check_in , check_out , get_all_vehicles , get_all_parking_records,get_all_stats
+from database import create_tables , check_in , check_out , get_all_vehicles , get_all_parking_records,get_all_stats,get_admin_search
 from pydantic import BaseModel
 
 app = FastAPI(title="Smart-Park" , version="3.0")
@@ -262,4 +262,20 @@ def get_stats():
 
 @app.post("/admin-search")
 async def admin_search(plate: str = Form(...)):
-    return 
+    records = get_admin_search(plate)
+
+    if not records:
+        return {
+            "success": False,
+            "message": "No records found for this vehicle.",
+            "records": []
+        }
+
+    return {
+        "success": True,
+        "message": "Vehicle records found.",
+        "records": [
+            dict(record)
+            for record in records
+        ]
+    } 
