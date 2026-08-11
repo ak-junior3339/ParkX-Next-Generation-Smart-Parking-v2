@@ -14,6 +14,8 @@
         <a href="/" style="text-decoration: none;">
             <button id="admin" style="display: block;margin-bottom: 10px;width: 33%;">Back To User</button>
         </a>
+        <button id="src" style="display: none;margin-bottom: 10px;width: 33%;" >Search a Vehicle</button>
+        <button id="bck" style="display: none;margin-bottom: 10px;width: 33%;" >Back To Dashboard</button>
         <h2 style="color: black;font-size: 30px;"> 👨🏻‍💻 ADMINISTRATOR PANEL 👨🏻‍💻</h2>
     </header>
 </div>
@@ -127,6 +129,8 @@ adminLoginButton.addEventListener("click", async function () {
             // Show dashboard
             document.getElementById("adminDashboard").style.display = "block";
 
+            document.getElementById("src").style.display = "block";
+
             // Load dashboard Data
             loadDashboardData();
 
@@ -147,6 +151,21 @@ adminLoginButton.addEventListener("click", async function () {
     }
 
 });
+
+const srch = document.getElementById("src")
+srch.addEventListener("click", async function () {
+    document.getElementById("adminDashboard").style.display = "none";
+    document.getElementById("bck").style.display = "block";
+    document.getElementById("src").style.display = "none";
+    
+});
+const bck = document.getElementById("bck")
+bck.addEventListener("click", async function () {
+    document.getElementById("adminDashboard").style.display = "block";
+    document.getElementById("bck").style.display = "none";
+    document.getElementById("src").style.display = "block";
+});
+
 async function loadDashboardData() {
 
     // ==========================
