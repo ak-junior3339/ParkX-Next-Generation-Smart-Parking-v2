@@ -232,3 +232,27 @@ def get_all_stats():
         "available": available,
         "today_checkins": today_checkins
     }
+
+def get_admin_search(plate):
+    conn = get_conn()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT
+            parking.id,
+            vehicles.plate_number,
+            vehicles.vehicle_type,
+            parking.check_in_time,
+            parking.check_out_time,
+            parking.status
+        FROM parking
+        JOIN vehicles
+            ON parking.vehicle_id = vehicles.id
+        WHERE vehicles.plate_number = ?
+    """, (plate,))
+
+    rows = cursor.fetchall()
+
+    conn.close()
+
+    return rows
