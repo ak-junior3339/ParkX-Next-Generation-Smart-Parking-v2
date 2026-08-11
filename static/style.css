@@ -544,7 +544,7 @@ select {
 }
 
 
-.admin-login {
+.admin-login,.adminSearch {
     min-height: 70vh;
     display: flex;
     justify-content: center;
@@ -587,7 +587,7 @@ select {
     font-size: 15px;
 }
 
-#adminPassword {
+#adminPassword,#searchedPlate {
     width: 100%;
 
     padding: 14px 16px;
@@ -612,11 +612,11 @@ select {
         box-shadow 0.2s ease;
 }
 
-#adminPassword::placeholder {
+#adminPassword,#searchedPlate::placeholder {
     color: #777777;
 }
 
-#adminPassword:focus {
+#adminPassword,#searchedPlate:focus {
     border-color: #D85A30;
 
     box-shadow:
@@ -646,3 +646,36 @@ select {
     }
 
 }
+
+.adminSearch{
+    display: flex;
+    justify-content: center;
+}
+/* 
+#searchedPlate {
+    width: 75%;
+
+    padding: 14px 16px;
+    margin: 0 auto;
+
+    border: 1px solid #819A91;
+    border-radius: 12px;
+
+    background: #15191b;
+    color: #ffffff;
+
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+#searchedPlate::placeholder {
+    color: #777777;
+}
+
+#searchedPlate:focus {
+    border-color: #D85A30;
+
+    box-shadow:
+        0 0 0 3px rgba(216, 90, 48, 0.15);
+} */
