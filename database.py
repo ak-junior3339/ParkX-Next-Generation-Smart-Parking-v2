@@ -236,7 +236,7 @@ def get_all_stats():
 def get_admin_search(plate):
     conn = get_conn()
     cursor = conn.cursor()
-
+    # it cannot happen using simple queries so we use join 
     cursor.execute("""
         SELECT
             parking.id,
