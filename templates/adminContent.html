@@ -48,6 +48,20 @@ The admin's content -->
     </div>
 
 </div>
+<div id="searchbody" style="display: none;">
+    <input
+            type="text"
+            id="searchedPlate"
+            placeholder="eg. MP04AA1234"
+        >
+
+        <button
+            type="button"
+            id="srcsubmitButton"
+        >
+            Search For Records
+        </button>
+</div>
 <div id="adminDashboard" style="display: none;">
     <div class="dashboard-stats">
 
@@ -157,7 +171,7 @@ srch.addEventListener("click", async function () {
     document.getElementById("adminDashboard").style.display = "none";
     document.getElementById("bck").style.display = "block";
     document.getElementById("src").style.display = "none";
-    
+
 });
 const bck = document.getElementById("bck")
 bck.addEventListener("click", async function () {
