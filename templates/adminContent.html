@@ -69,7 +69,33 @@ The admin's content -->
         >
             Search For Records
         </button>
+        <div id="srcTableCont" class="src-table-container" style="display: none;">
+        <h2 style="color: black;font-size: 30px;">Matching Records</h2>
+        <table id="srcTable">
+            <thead>
+                <tr><th>Parking-ID</th><th>NUMBER PLATE</th><th>VEHICLE TYPE</th><th>Check-in-time</th>
+                    <th>Check-out-time</th><th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="srcBody">
+                
+            </tbody>
+        </table>
 </div>
+</div>
+<!-- <div id="srcTableCont" class="src-table-container" style="display: none;">
+        <h2 style="color: black;font-size: 30px;">Matching Records</h2>
+        <table id="srcTable">
+            <thead>
+                <tr><th>Parking-ID</th><th>NUMBER PLATE</th><th>VEHICLE TYPE</th><th>Check-in-time</th>
+                    <th>Check-out-time</th><th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="srcBody">
+                
+            </tbody>
+        </table>
+</div> -->
 <div id="adminDashboard" style="display: none;">
     <div class="dashboard-stats">
 
@@ -180,35 +206,53 @@ srch.addEventListener("click", async function () {
     document.getElementById("bck").style.display = "block";
     document.getElementById("src").style.display = "none";
     document.getElementById("searchbody").style.display = "block";
-
+});
+const srcsubmit = document.getElementById("srcsubmitButton")
+srcsubmit.addEventListener("click", async function () {
     const number = document.getElementById("searchedPlate").value;
-    if (!number) {
-        alert("Please enter a Car regestration Number !")
-        return;
-    }
-    try {
-        const formData = new FormData();
-        formData.append("Plate",number)
-        const response = await fetch("/admin-search", {
-            method: "POST",
-            body: formData
-        });
-        const data = await response.json();
-        if (data.success) {
-            
-        } else {
-
-            alert("No Records Found !")
-
+        if (!number) {
+            alert("Please enter a Car regestration Number !")
+            return;
         }
+        try {
+            const Sbody = document.getElementById("srcBody")
+            const formData = new FormData();
+            formData.append("plate",number)
+            const response = await fetch("/admin-search", {
+                method: "POST",
+                body: formData
+            });
+            const data = await response.json();
+            Sbody.innerHTML = "";
+            if (data.success) {
+                document.getElementById("srcTableCont").style.display="block"
+                data.records.forEach(record => {
 
-    } catch (error) {
+                const trElement = document.createElement("tr");
 
-        console.error("Login error:", error);
-    }
-    
+                trElement.innerHTML = `
+                    <td>${record.id}</td>
+                    <td>${record.plate_number}</td>
+                    <td>${record.vehicle_type}</td>
+                    <td>${record.check_in_time}</td>
+                    <td>${record.check_out_time}</td>
+                    <td>${record.status}</td>
+                `;
+
+                Sbody.appendChild(trElement);
+            });
 
 
+            } else {
+
+                alert("No Records Found !")
+
+            }
+
+        } catch (error) {
+
+            console.error("Login error:", error);
+        }
 });
 const bck = document.getElementById("bck")
 bck.addEventListener("click", async function () {
@@ -216,6 +260,7 @@ bck.addEventListener("click", async function () {
     document.getElementById("bck").style.display = "none";
     document.getElementById("src").style.display = "block";
     document.getElementById("searchbody").style.display = "none";
+    document.getElementById("srcTableCont").style.display="none"
 });
 
 async function loadDashboardData() {
