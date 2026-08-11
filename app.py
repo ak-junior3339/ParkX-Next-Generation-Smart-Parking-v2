@@ -259,3 +259,7 @@ def get_parking_data():
 def get_stats():
     stats = get_all_stats()
     return stats
+
+@app.post("/admin-search")
+async def admin_search(plate: str = Form(...)):
+    return 
