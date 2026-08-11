@@ -34,11 +34,14 @@ The admin's content -->
             type="password"
             id="adminPassword"
             placeholder="Enter password"
+
         >
 
         <button
             type="button"
             id="adminLoginButton"
+            style="width: 50%;"
+
         >
             Continue
         </button>
@@ -48,16 +51,21 @@ The admin's content -->
     </div>
 
 </div>
-<div id="searchbody" style="display: none;">
+<div id="searchbody" class="adminSearch" style="display: none;">
     <input
             type="text"
             id="searchedPlate"
             placeholder="eg. MP04AA1234"
+            
         >
 
         <button
             type="button"
             id="srcsubmitButton"
+            style="width: 25%;
+            display: flex;
+            align-items: center;
+            justify-content: center;"
         >
             Search For Records
         </button>
@@ -171,6 +179,8 @@ srch.addEventListener("click", async function () {
     document.getElementById("adminDashboard").style.display = "none";
     document.getElementById("bck").style.display = "block";
     document.getElementById("src").style.display = "none";
+    document.getElementById("searchbody").style.display = "block";
+
 
 });
 const bck = document.getElementById("bck")
@@ -178,6 +188,7 @@ bck.addEventListener("click", async function () {
     document.getElementById("adminDashboard").style.display = "block";
     document.getElementById("bck").style.display = "none";
     document.getElementById("src").style.display = "block";
+    document.getElementById("searchbody").style.display = "none";
 });
 
 async function loadDashboardData() {
