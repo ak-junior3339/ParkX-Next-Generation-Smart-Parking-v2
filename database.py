@@ -232,7 +232,7 @@ def get_all_stats():
         "available": available,
         "today_checkins": today_checkins
     }
-
+## Function for fetching the searched car in admin section
 def get_admin_search(plate):
     conn = get_conn()
     cursor = conn.cursor()
