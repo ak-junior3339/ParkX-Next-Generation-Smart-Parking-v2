@@ -226,6 +226,7 @@ srcsubmit.addEventListener("click", async function () {
             Sbody.innerHTML = "";
             if (data.success) {
                 document.getElementById("srcTableCont").style.display="block"
+                // the returned data contains record which has all the relevant search results 
                 data.records.forEach(record => {
 
                 const trElement = document.createElement("tr");
