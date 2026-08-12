@@ -189,12 +189,8 @@ The current build is a fully working, self-contained ANPR parking pipeline. Plan
 
 -  **Automated Payment & FASTag Integration** — calculate parking cost dynamically based on `check_in_time`/`check_out_time` duration and a configurable rate card, and settle it automatically via **FASTag / UPI / payment gateway** at exit, removing manual cash handling entirely.
 -  **Slot-Level Allocation** — extend the schema with a `slots` table so each check-in is mapped to a specific, trackable parking bay (`A-12`, `B-04`, etc.), enabling slot-wise availability and guided navigation to an open spot.
--  **Advanced Admin Filtering** — layer date-range, status, and vehicle-type filters on top of the existing plate search for faster fleet-wide lookups at scale.
--  **Stronger Auth** — replace the static admin password with hashed credentials + JWT/session-based auth and role-based access.
 -  **Live Camera Feed Integration** — move from manual image upload to a live RTSP/webcam feed at the boom barrier for a true contactless flow.
--  **Multi-format Plate Support** — extend regex/state-code validation beyond Indian plates for international deployments.
 -  **Blacklist/Whitelist Lists** — flag stolen/unauthorized vehicles automatically at entry.
-
 ---
 
 ## What This Project Demonstrates
@@ -203,7 +199,7 @@ The current build is a fully working, self-contained ANPR parking pipeline. Plan
 - Practical handling of a real-world multi-framework conflict (PyTorch + PaddlePaddle) via process isolation — not just "it works on my machine."
 - Defensive backend engineering: layered file validation, size limits, idempotent business logic, and structured error handling.
 - Full-stack ownership: database design, REST API, and a hand-built responsive frontend with custom UX touches (the scanning animation, manual-entry fallback).
-- Thinking beyond the MVP: a clear, realistic product roadmap (payments, slot management, search) that shows product sense, not just coding ability.
+- Thinking beyond the MVP: a clear, realistic product roadmap (payments, slot management, Search (Done)) that shows product sense, not just coding ability.
 
 ---
 
