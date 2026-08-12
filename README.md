@@ -1,4 +1,3 @@
-<div align="center">
 
 #  ParkX — Next-Generation Smart Parking System v2
 
@@ -15,7 +14,7 @@ Built for malls, airports, corporate campuses, and gated communities.
 
 [Demo](#-demo) • [Features](#-features) •  [Tech Stack](#-tech-stack) • [Setup](#-getting-started) • [API](#-api-reference) 
 
-</div>
+
 
 ---
 
@@ -163,6 +162,7 @@ uvicorn app:app --reload
 
 Then visit **http://localhost:8000** for the Single Purpose UI, and **http://localhost:8000/admincontent** for the admin panel.
 
+To Access Admin Content use the password : Admin1234 (Hard-Coded)
 ---
 
 ##  API Reference
