@@ -178,7 +178,7 @@ def get_parking_amount(park_id):
     cursor.execute("""
         SELECT (JULIANDAY(check_out_time) - JULIANDAY(check_in_time))*24 FROM parking WHERE 
         id = ?
-    """,(park_id))
+    """,(park_id,))
 
     amount = cursor.fetchone()[0]
     conn.close()
