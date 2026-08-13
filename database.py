@@ -171,6 +171,19 @@ def check_out(plate_number):
         "pNumber" : plate_number
     }
 
+def get_parking_amount(park_id):
+    conn = get_conn()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT (JULIANDAY(check_out_time) - JULIANDAY(check_in_time))*24 FROM parking WHERE 
+        id = ?
+    """,(park_id))
+
+    amount = cursor.fetchone()[0]
+    conn.close()
+    return amount
+
 # Getting all vehicle information 
 def get_all_vehicles():
     conn = get_conn()
@@ -257,15 +270,3 @@ def get_admin_search(plate):
 
     return rows
 
-def get_parking_amount(vehicle_id):
-    conn = get_conn()
-    cursor = conn.cursor()
-
-    cursor.execute("""
-        SELECT (JULIANDAY(check_out_time) - JULIANDAY(check_in_time))*24 FROM parking WHERE 
-        vehicle_id = ? AND status = 'PARKED'
-    """,(vehicle_id))
-
-    amount = cursor.fetchone()[0]
-    conn.close()
-    return amount
