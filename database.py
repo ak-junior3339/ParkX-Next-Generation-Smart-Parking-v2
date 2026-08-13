@@ -179,10 +179,14 @@ def get_parking_amount(park_id):
         SELECT (JULIANDAY(check_out_time) - JULIANDAY(check_in_time))*24 FROM parking WHERE 
         id = ?
     """,(park_id,))
-
-    amount = cursor.fetchone()[0]
+    PRICE_PER_HOUR = 20
+    time  = cursor.fetchone()[0]
+    amount = time * PRICE_PER_HOUR
     conn.close()
-    return amount
+    return {
+        "TIME":time,
+        "AMOUNT":amount
+    }
 
 # Getting all vehicle information 
 def get_all_vehicles():
