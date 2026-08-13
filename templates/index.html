@@ -198,7 +198,7 @@ checkOutButton.addEventListener("click",async function ()  {
         const data = await response.json();
         console.log(data)
         if (data.success){
-            alert(data.message + " for "+data.pNumber);
+            alert(data.message + " for "+data.pNumber+" and amount payable ₹"+data.amount + "/- The vehicle was parked for "+data.time+" hours");
         }
         else{
             alert(data.message);
