@@ -1,5 +1,5 @@
 import sqlite3
-
+import math
 DATABASE = "Parking.db"
 
 def get_conn():
@@ -184,7 +184,7 @@ def get_parking_amount(park_id):
     """,(park_id,))
     PRICE_PER_HOUR = 20
     time  = cursor.fetchone()[0]
-    amount = time * PRICE_PER_HOUR
+    amount = math.ceil(time) * PRICE_PER_HOUR
     conn.close()
     return {
         "TIME":time,
