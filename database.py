@@ -159,8 +159,8 @@ def check_out(plate_number):
     cursor.execute("""
         UPDATE parking SET check_out_time = CURRENT_TIMESTAMP,status = 'COMPLETED' where id = ?
     """,(parking_record["id"],))
-
     conn.commit()
+    final_cost = get_parking_amount(parking_record["id"])
     conn.close()
 
     return {
@@ -168,7 +168,9 @@ def check_out(plate_number):
         "message": "Vehicle check out successfull ",
         "vehicle_id": vehicle_id,
         "parking_id": parking_record["id"],
-        "pNumber" : plate_number
+        "pNumber" : plate_number,
+        "time" : final_cost["TIME"] ,
+        "amount":final_cost["AMOUNT"]
     }
 
 def get_parking_amount(park_id):
