@@ -187,7 +187,7 @@ def get_parking_amount(park_id):
     amount = math.ceil(time) * PRICE_PER_HOUR
     conn.close()
     return {
-        "TIME":time,
+        "TIME":f"{time:.3f}",
         "AMOUNT":amount
     }
 
