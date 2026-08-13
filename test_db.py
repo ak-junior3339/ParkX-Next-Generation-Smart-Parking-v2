@@ -7,113 +7,117 @@ from database import (
     check_in,
     check_out,
     get_all_vehicles,
-    get_all_parking_records
+    get_all_parking_records,
+    get_parking_amount
 )
 
 
 # Create Database Tables
 
 
-create_tables()
+# create_tables()
 
-print("\n==========================")
-print("DATABASE TEST")
-print("==========================\n")
-
-
-# 1. Add Vehicle
+# print("\n==========================")
+# print("DATABASE TEST")
+# print("==========================\n")
 
 
-plate = "MP09AA1234"
-
-vehicle = get_vehicle(plate)
-
-if vehicle is None:
-
-    vehicle_id = add_vehicles(plate)
-
-    print("Vehicle created successfully.")
-    print("Vehicle ID:", vehicle_id)
-
-else:
-
-    vehicle_id = vehicle["id"]
-
-    print("Vehicle already exists.")
-    print("Vehicle ID:", vehicle_id)
+# # 1. Add Vehicle
 
 
+# plate = "MP09AA1234"
 
-# 2. Check-In
+# vehicle = get_vehicle(plate)
 
+# if vehicle is None:
 
-print("\n--- CHECK-IN ---")
+#     vehicle_id = add_vehicles(plate)
 
-result = check_in(plate)
+#     print("Vehicle created successfully.")
+#     print("Vehicle ID:", vehicle_id)
 
-print(result)
+# else:
+
+#     vehicle_id = vehicle["id"]
+
+#     print("Vehicle already exists.")
+#     print("Vehicle ID:", vehicle_id)
 
 
 
-# 3. Try Check-In Again
+# # 2. Check-In
 
 
-print("\n--- SECOND CHECK-IN ---")
+# print("\n--- CHECK-IN ---")
 
-result = check_in(plate)
+# result = check_in(plate)
 
-print(result)
-
-
-
-# 4. Check-Out
+# print(result)
 
 
-print("\n--- CHECK-OUT ---")
 
-result = check_out(plate)
-
-print(result)
+# # 3. Try Check-In Again
 
 
-# 5. Try Check-Out Again
+# print("\n--- SECOND CHECK-IN ---")
+
+# result = check_in(plate)
+
+# print(result)
 
 
-print("\n--- SECOND CHECK-OUT ---")
 
-result = check_out(plate)
-
-print(result)
+# # 4. Check-Out
 
 
-# ==========================
-# Display Vehicles
-# ==========================
+# print("\n--- CHECK-OUT ---")
 
-print("\n--- VEHICLES DATABASE ---")
+# result = check_out(plate)
 
-vehicles = get_all_vehicles()
-
-for vehicle in vehicles:
-
-    print(
-        dict(vehicle)
-    )
+# print(result)
 
 
-# ==========================
-# Display Parking Database
-# ==========================
+# # 5. Try Check-Out Again
 
-print("\n--- PARKING DATABASE ---")
 
-parking_records = get_all_parking_records()
+# print("\n--- SECOND CHECK-OUT ---")
 
-for record in parking_records:
+# result = check_out(plate)
 
-    print(
-        dict(record)
-    )
+# print(result)
+
+
+# # ==========================
+# # Display Vehicles
+# # ==========================
+
+# print("\n--- VEHICLES DATABASE ---")
+
+# vehicles = get_all_vehicles()
+
+# for vehicle in vehicles:
+
+#     print(
+#         dict(vehicle)
+#     )
+
+
+# # ==========================
+# # Display Parking Database
+# # ==========================
+
+# print("\n--- PARKING DATABASE ---")
+
+# parking_records = get_all_parking_records()
+
+# for record in parking_records:
+
+#     print(
+#         dict(record)
+#     )
+
+amount = get_parking_amount(1)
+print(amount)
 
 
 # ==========================
