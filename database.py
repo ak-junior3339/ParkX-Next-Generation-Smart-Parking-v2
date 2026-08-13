@@ -137,6 +137,7 @@ def check_out(plate_number):
     # First job is to check wheteher vehicle exsists or not
     vehicle = get_vehicle(plate_number)
     if vehicle is None:
+        conn.close()
         return {
             "success": False,
             "message": "Vehicle does not exist."
@@ -160,8 +161,8 @@ def check_out(plate_number):
         UPDATE parking SET check_out_time = CURRENT_TIMESTAMP,status = 'COMPLETED' where id = ?
     """,(parking_record["id"],))
     conn.commit()
-    final_cost = get_parking_amount(parking_record["id"])
     conn.close()
+    final_cost = get_parking_amount(parking_record["id"])
 
     return {
         "success": True,
