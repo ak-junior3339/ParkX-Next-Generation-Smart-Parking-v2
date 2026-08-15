@@ -408,7 +408,7 @@ select {
     letter-spacing: 0.05rem;
 }
 
-/* Table Body */
+
 #vehicleTable td {
     padding: 14px 18px;
     border-bottom: 1px solid #eeeeee;
@@ -416,18 +416,18 @@ select {
     font-size: 0.95rem;
 }
 
-/* Alternate rows */
+
 #vehicleTable tbody tr:nth-child(even) {
     background-color: #fafafa;
 }
 
-/* Hover effect */
+
 #vehicleTable tbody tr:hover {
     background-color: #fff3ef;
     transition: background-color 0.2s ease;
 }
 
-/* Remove border from last row */
+
 #vehicleTable tbody tr:last-child td {
     border-bottom: none;
 }
@@ -441,7 +441,7 @@ select {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* Table Header */
+
 #parkingTable thead {
     background-color: #D85A30;
     color: #ffffff;
@@ -455,7 +455,7 @@ select {
     letter-spacing: 0.05rem;
 }
 
-/* Table Body */
+
 #parkingTable td {
     padding: 14px 18px;
     border-bottom: 1px solid #eeeeee;
@@ -463,25 +463,22 @@ select {
     font-size: 0.95rem;
 }
 
-/* Alternate rows */
+
 #parkingTable tbody tr:nth-child(even) {
     background-color: #fafafa;
 }
 
-/* Hover effect */
+
 #parkingTable tbody tr:hover {
     background-color: #fff3ef;
     transition: background-color 0.2s ease;
 }
 
-/* Remove border from last row */
 #parkingTable tbody tr:last-child td {
     border-bottom: none;
 }
 
-/* ==========================
-   Dashboard Statistics
-   ========================== */
+
 
 .dashboard-stats {
     width: 100%;
@@ -651,34 +648,6 @@ select {
     display: flex;
     justify-content: center;
 }
-/* 
-#searchedPlate {
-    width: 75%;
-
-    padding: 14px 16px;
-    margin: 0 auto;
-
-    border: 1px solid #819A91;
-    border-radius: 12px;
-
-    background: #15191b;
-    color: #ffffff;
-
-    font-size: 16px;
-    outline: none;
-    box-sizing: border-box;
-}
-
-#searchedPlate::placeholder {
-    color: #777777;
-}
-
-#searchedPlate:focus {
-    border-color: #D85A30;
-
-    box-shadow:
-        0 0 0 3px rgba(216, 90, 48, 0.15);
-} */
 
 #srcTable {
     width: 100%;
@@ -689,7 +658,7 @@ select {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* Table Header */
+
 #srcTable thead {
     background-color: #D85A30;
     color: #ffffff;
@@ -703,7 +672,7 @@ select {
     letter-spacing: 0.05rem;
 }
 
-/* Table Body */
+
 #srcTable td {
     padding: 14px 18px;
     border-bottom: 1px solid #eeeeee;
@@ -711,18 +680,17 @@ select {
     font-size: 0.95rem;
 }
 
-/* Alternate rows */
+
 #srcTable tbody tr:nth-child(even) {
     background-color: #fafafa;
 }
 
-/* Hover effect */
 #srcTable tbody tr:hover {
     background-color: #fff3ef;
     transition: background-color 0.2s ease;
 }
 
-/* Remove border from last row */
+
 #srcTable tbody tr:last-child td {
     border-bottom: none;
 }
