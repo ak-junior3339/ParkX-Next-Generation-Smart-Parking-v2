@@ -12,94 +12,63 @@ from database import (
 )
 
 
-# Create Database Tables
+#Create Database Tables
 
 
-# create_tables()
+create_tables()
 
 # print("\n==========================")
 # print("DATABASE TEST")
 # print("==========================\n")
 
 
-# # 1. Add Vehicle
+# 1. Add Vehicle
 
 
-# plate = "MP09AA1234"
+plate = "MP09AA1234"
 
-# vehicle = get_vehicle(plate)
+vehicle = get_vehicle(plate)
 
-# if vehicle is None:
+if vehicle is None:
 
-#     vehicle_id = add_vehicles(plate)
+    vehicle_id = add_vehicles(plate)
 
-#     print("Vehicle created successfully.")
-#     print("Vehicle ID:", vehicle_id)
+    print("Vehicle created successfully.")
+    print("Vehicle ID:", vehicle_id)
 
-# else:
+else:
+÷
+result = check_in(plate)
 
-#     vehicle_id = vehicle["id"]
-
-#     print("Vehicle already exists.")
-#     print("Vehicle ID:", vehicle_id)
-
-
-
-# # 2. Check-In
-
-
-# print("\n--- CHECK-IN ---")
-
-# result = check_in(plate)
-
-# print(result)
+print(result)
 
 
 
-# # 3. Try Check-In Again
+# 3. Try Check-In Again
 
 
-# print("\n--- SECOND CHECK-IN ---")
+print("\n--- SECOND CHECK-IN ---")
 
-# result = check_in(plate)
+result = check_in(plate)
 
-# print(result)
-
-
-
-# 4. Check-Out
+print(result)
 
 
-# print("\n--- CHECK-OUT ---")
-
-# result = check_out(plate)
-
-# print(result)
-
-
-# # 5. Try Check-Out Again
-
-
-# print("\n--- SECOND CHECK-OUT ---")
-
-# result = check_out(plate)
-
-# print(result)
-
+÷
 
 # # ==========================
 # # Display Vehicles
 # # ==========================
 
-# print("\n--- VEHICLES DATABASE ---")
+print("\n--- VEHICLES DATABASE ---")
 
-# vehicles = get_all_vehicles()
+vehicles = get_all_vehicles()
 
-# for vehicle in vehicles:
+for vehicle in vehicles:
 
-#     print(
-#         dict(vehicle)
-#     )
+    print(
+        dict(vehicle)
+    )
 
 
 # ==========================
@@ -119,9 +88,9 @@ for record in parking_records:
 
 
 
-# val = get_parking_amount(1)
-# print(val["TIME"])
-# print(val["AMOUNT"],"/-")
+val = get_parking_amount(1)
+print(val["TIME"])
+print(val["AMOUNT"],"/-")
 
 
 # ==========================
