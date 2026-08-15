@@ -326,7 +326,7 @@ async function loadDashboardData() {
                 <td>${parking.check_in_time}</td>
                 <td>${parking.check_out_time}</td>
                 <td>${parking.status}</td>
-                <td>${parking.Ttime}</td>
+                <td>${Number(parking.Ttime).toFixed(5)}</td>
                 <td>${parking.Tamount}</td>
             `;
 
