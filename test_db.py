@@ -22,37 +22,37 @@ print("DATABASE TEST")
 print("==========================\n")
 
 
-# # 1. Add Vehicle
+# 1. Add Vehicle
 
 
-# plate = "MP09AA1234"
+plate = "MP09AA1234"
 
-# vehicle = get_vehicle(plate)
+vehicle = get_vehicle(plate)
 
-# if vehicle is None:
+if vehicle is None:
 
-#     vehicle_id = add_vehicles(plate)
+    vehicle_id = add_vehicles(plate)
 
-#     print("Vehicle created successfully.")
-#     print("Vehicle ID:", vehicle_id)
+    print("Vehicle created successfully.")
+    print("Vehicle ID:", vehicle_id)
 
-# else:
+else:
 
-#     vehicle_id = vehicle["id"]
+    vehicle_id = vehicle["id"]
 
-#     print("Vehicle already exists.")
-#     print("Vehicle ID:", vehicle_id)
-
-
-
-# # 2. Check-In
+    print("Vehicle already exists.")
+    print("Vehicle ID:", vehicle_id)
 
 
-# print("\n--- CHECK-IN ---")
 
-# result = check_in(plate)
+# 2. Check-In
 
-# print(result)
+
+print("\n--- CHECK-IN ---")
+
+result = check_in(plate)
+
+print(result)
 
 
 
@@ -67,14 +67,14 @@ print("==========================\n")
 
 
 
-# # 4. Check-Out
+# 4. Check-Out
 
 
-# print("\n--- CHECK-OUT ---")
+print("\n--- CHECK-OUT ---")
 
-# result = check_out(plate)
+result = check_out(plate)
 
-# print(result)
+print(result)
 
 
 # # 5. Try Check-Out Again
@@ -102,19 +102,22 @@ print("==========================\n")
 #     )
 
 
-# # ==========================
-# # Display Parking Database
-# # ==========================
+# ==========================
+# Display Parking Database
+# ==========================
 
-# print("\n--- PARKING DATABASE ---")
+print("\n--- PARKING DATABASE ---")
 
-# parking_records = get_all_parking_records()
+parking_records = get_all_parking_records()
 
-# for record in parking_records:
+for record in parking_records:
 
-#     print(
-#         dict(record)
-#     )
+    print(
+        dict(record)
+    )
+
+
+
 
 # val = get_parking_amount(1)
 # print(val["TIME"])
