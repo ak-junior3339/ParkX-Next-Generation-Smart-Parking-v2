@@ -31,6 +31,8 @@ def create_tables():
             check_in_time DATETIME DEFAULT CURRENT_TIMESTAMP,
             check_out_time DATETIME,
             status TEXT NOT NULL DEFAULT 'PARKED',
+            time REAL,
+            amount INTEGER,
 
             FOREIGN KEY (vehicle_id)
             REFERENCES vehicles(id)
