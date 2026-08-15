@@ -15,11 +15,11 @@ from database import (
 # Create Database Tables
 
 
-# create_tables()
+create_tables()
 
-# print("\n==========================")
-# print("DATABASE TEST")
-# print("==========================\n")
+print("\n==========================")
+print("DATABASE TEST")
+print("==========================\n")
 
 
 # # 1. Add Vehicle
@@ -116,9 +116,9 @@ from database import (
 #         dict(record)
 #     )
 
-val = get_parking_amount(1)
-print(val["TIME"])
-print(val["AMOUNT"],"/-")
+# val = get_parking_amount(1)
+# print(val["TIME"])
+# print(val["AMOUNT"],"/-")
 
 
 # ==========================
