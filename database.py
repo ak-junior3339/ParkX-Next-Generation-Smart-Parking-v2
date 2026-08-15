@@ -179,7 +179,7 @@ def check_out(plate_number):
 def get_parking_amount(park_id):
     conn = get_conn()
     cursor = conn.cursor()
-
+# JULIANDAY * 24  gives the total time in hours
     cursor.execute("""
         SELECT (JULIANDAY(check_out_time) - JULIANDAY(check_in_time))*24 FROM parking WHERE 
         id = ?
@@ -272,14 +272,14 @@ def get_admin_search(plate):
             parking.check_in_time,
             parking.check_out_time,
             parking.status
-            parking.Ttime,
+            parking.Ttime,   
             parkingTamount
         FROM parking
         JOIN vehicles
             ON parking.vehicle_id = vehicles.id
         WHERE vehicles.plate_number = ?
     """, (plate,))
-
+# added the new Ttime ad Tamount in admin search
     rows = cursor.fetchall()
 
     conn.close()
