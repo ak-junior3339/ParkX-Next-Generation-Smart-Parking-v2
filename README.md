@@ -217,5 +217,5 @@ The current build is a fully working, self-contained ANPR parking pipeline. Plan
 This project is licensed under the MIT License
 
 ## TODO (this section will be removed)
-### add new columns as total time and amount
+
 ### a good checkout page with provision for qr , fastag etc
