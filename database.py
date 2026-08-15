@@ -272,6 +272,8 @@ def get_admin_search(plate):
             parking.check_in_time,
             parking.check_out_time,
             parking.status
+            parking.Ttime,
+            parkingTamount
         FROM parking
         JOIN vehicles
             ON parking.vehicle_id = vehicles.id
