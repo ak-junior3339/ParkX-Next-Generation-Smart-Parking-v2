@@ -326,7 +326,8 @@ async function loadDashboardData() {
                 <td>${parking.check_in_time}</td>
                 <td>${parking.check_out_time}</td>
                 <td>${parking.status}</td>
-                <td>${Number(parking.Ttime).toFixed(5)}</td>
+                // fixing the decimal to 5 digits only
+                <td>${Number(parking.Ttime).toFixed(5)}</td>  
                 <td>${parking.Tamount}</td>
             `;
 
