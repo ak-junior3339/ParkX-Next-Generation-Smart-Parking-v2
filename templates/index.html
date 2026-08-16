@@ -199,7 +199,7 @@ checkOutButton.addEventListener("click",async function ()  {
         console.log(data)
         if (data.success){
             // alert(data.message + " for "+data.pNumber+" and amount payable ₹"+data.amount + "/- The vehicle was parked for "+data.time+" hours");
-            fetch("/check-out-page")
+            window.location.href = "/check-out-page";
         }
         else{
             alert(data.message);
