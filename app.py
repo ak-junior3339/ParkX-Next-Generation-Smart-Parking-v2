@@ -213,10 +213,30 @@ def check_in_vehicle(request : CheckInRequest):
 
 class CheckOutRequest(BaseModel):
     plate_number : str 
-@app.post("/check-out")
-def check_out_vehicle(request : CheckOutRequest):
-    result = check_out(request.plate_number)
-    return result
+@app.post("/check-out",response_class=HTMLResponse)
+def check_out_vehicle(request: Request,checkout: CheckOutRequest):
+    result = check_out(checkout.plate_number)
+    if not result["success"]:
+        return templates.TemplateResponse(
+            request,
+            "CheckOut.html",
+            {
+                "message": result["message"],
+                "success": False
+            }
+        )
+
+    return templates.TemplateResponse(
+        request,
+        "CheckOut.html",
+        {
+            "message": result["message"],
+            "plate": result["pNumber"],
+            "amount": result["amount"],
+            "time": result["time"],
+            "success": True
+        }
+    )
 
 @app.post("/admin-login")
 async def admin_login(password: str = Form(...)):
@@ -280,10 +300,16 @@ async def admin_search(plate: str = Form(...)):
             for record in records
         ]
     } 
-#checkout page for checking out a vehicle
-@app.get("/check-out-page",response_class=HTMLResponse)
-def checkoutContent(request: Request):
-    return templates.TemplateResponse( 
-        request,
-        "CheckOut.html",
-    )
+# #checkout page for checking out a vehicle
+# @app.get("/check-out-page",response_class=HTMLResponse)
+# def checkoutContent(request: Request):
+#     return templates.TemplateResponse( 
+#         request,
+#         "CheckOut.html",
+#         {
+#         "message": "Checkout successful",
+#         "plate": plate_number,
+#         "amount": amount,
+#         "time": parking_time
+#         }
+#     )
