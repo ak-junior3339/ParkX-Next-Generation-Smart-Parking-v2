@@ -280,3 +280,11 @@ async def admin_search(plate: str = Form(...)):
             for record in records
         ]
     } 
+
+@app.get("/check-out-page")
+def check-out-Content(request: Request):
+
+    return templates.TemplateResponse(
+        request, 
+        "CheckOut.html"
+    )
