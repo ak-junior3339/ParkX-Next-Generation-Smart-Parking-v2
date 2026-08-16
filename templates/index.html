@@ -195,15 +195,6 @@ checkOutButton.addEventListener("click",async function ()  {
                 plate_number : plate
             })
         });
-        // const data = await response.json();
-        // console.log(data)
-        // if (data.success){
-        //     // alert(data.message + " for "+data.pNumber+" and amount payable ₹"+data.amount + "/- The vehicle was parked for "+data.time+" hours");
-        //     window.location.href = "/check-out-page";
-        // }
-        // else{
-        //     alert(data.message);
-        // }
     if (response.ok) {
 
             const html = await response.text();
