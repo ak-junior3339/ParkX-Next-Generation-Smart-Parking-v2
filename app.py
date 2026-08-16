@@ -217,6 +217,7 @@ class CheckOutRequest(BaseModel):
 def check_out_vehicle(request: Request,checkout: CheckOutRequest):
     result = check_out(checkout.plate_number)
     if not result["success"]:
+        #returning the template with checking the status so that no abnormal errors happen
         return templates.TemplateResponse(
             request,
             "CheckOut.html",
