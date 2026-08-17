@@ -728,3 +728,10 @@ select {
         font-size: 20px;
         font-weight: bold;
     }
+
+.pay-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
