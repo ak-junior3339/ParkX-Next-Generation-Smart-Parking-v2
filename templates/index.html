@@ -198,8 +198,15 @@ checkOutButton.addEventListener("click",async function ()  {
     if (response.ok) {
 
             const html = await response.text();
-
             document.documentElement.innerHTML = html;
+            const upiButton = document.getElementById("upi");
+            upiButton.addEventListener("click", function(event) {
+                event.preventDefault();
+
+                document.getElementById("checkoutcard").style.display = "none";
+                document.getElementById("payicons").style.display = "none";
+                document.getElementById("upiinterface").style.display = "block";
+            });
 
         } else {
             alert("Checkout failed.");
