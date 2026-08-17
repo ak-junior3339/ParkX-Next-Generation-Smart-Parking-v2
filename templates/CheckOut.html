@@ -16,8 +16,14 @@
 <div>
     <button id="redetectButton" type="button" style="display: block;"><a href="/" style="text-decoration: none; color: white;">Back To Detection</a></button>
 </div>
+<div class="upi-interface" id="upiinterface" style="display: none;">
+    <img src="/static/payment-image/QR.png" alt="yourQRLogo" width="250" height="200">
+    <p>Vehicle Number: {{ plate }}</p>
+    <p>Amount Payable: ₹{{ amount }}/-</p>
+    <button id="submitpay" type="button" style="display: block;">Confirm Pay</button>
+</div>
 <!-- displaying message coming from backend -->
-<div class="checkout-card">
+<div class="checkout-card" id="checkoutcard">
     <h1>{{ message }}</h1>
 
     <p>Vehicle Number: {{ plate }}</p>
@@ -26,12 +32,24 @@
 
     <p>Amount Payable: ₹{{ amount }}/-</p>
 </div>
-<div class="pay-icons">
-    <a href="" style="text-decoration: none;">
+<div class="pay-icons" id="payicons">
+    <a href="#" id="upi" style="text-decoration: none;">
         <img src="/static/payment-image/UPI-Logo-vector.svg" alt="UPILogo" width="300" height="100">
     </a>
-    <a href="#" style="text-decoration: none;">
+    <a href="#" id="fastag" style="text-decoration: none;">
         <img src="/static/payment-image/Fastag-logo.png" alt="fastag-Logo" width="300" height="100">
     </a>
 </div>
+
+<script>
+// const upiButton = document.getElementById("upi");
+// upiButton.addEventListener("click",  function(event) {
+//     console.log("UPI CLICKED");
+//     event.preventDefault();
+//     document.getElementById("checkoutcard").style.display = "none";
+//     document.getElementById("payicons").style.display = "none";
+//     document.getElementById("upiinterface").style.display = "block"
+//
+// });
+</script>
 </body>
