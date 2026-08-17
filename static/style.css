@@ -735,3 +735,33 @@ select {
     align-items: center;
     gap: 20px;
 }
+.pay-icons img {
+    width: 150px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+.upi-interface{
+        width: 400px;
+        margin: 60px auto;
+        padding: 30px;
+        background: #15191b;
+        border: 1px solid #819A91;
+        border-radius: 16px;
+        box-shadow: 0 8px 25px #D85A30;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+    }
+    .upi-interface p {
+        padding: 12px 0;
+        margin: 0;
+        border-bottom: 1px solid #333;
+        font-size: 16px;
+    }
+
+    .upi-interface p:last-child {
+        border-bottom: none;
+        margin-top: 10px;
+        font-size: 20px;
+        font-weight: bold;
+    }
