@@ -296,7 +296,6 @@ def payment_status(park_id):
             UPDATE parking SET Payment_status = 'DONE' WHERE id = ?
         """,(park_id,))
         conn.commit()
-        conn.close()
         return {
             'success' : True
         }
@@ -304,3 +303,5 @@ def payment_status(park_id):
         return{
             'success' : False
         }
+    finally :
+        conn.close()
