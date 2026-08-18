@@ -11,107 +11,64 @@ from database import (
     get_parking_amount,
     payment_status
 )
+from database import *
 
-
-#Create Database Tables
-
-
+# 1. Create tables
 create_tables()
 
-# print("\n==========================")
-# print("DATABASE TEST")
-# print("==========================\n")
+# 2. Add vehicles
+vehicle1 = add_vehicles("MP04AB1234")
+vehicle2 = add_vehicles("MP09CD5678")
 
+print("Vehicle 1 ID:", vehicle1)
+print("Vehicle 2 ID:", vehicle2)
 
-# 1. Add Vehicle
+# 3. Get vehicle
+vehicle = get_vehicle("MP04AB1234")
+print("Vehicle:", dict(vehicle))
 
+# 4. Check in
+result = check_in("MP04AB1234")
+print("Check-in:", result)
 
-plate = "MP09AA1234"
-
-vehicle = get_vehicle(plate)
-
-if vehicle is None:
-
-    vehicle_id = add_vehicles(plate)
-
-    print("Vehicle created successfully.")
-    print("Vehicle ID:", vehicle_id)
-
-else:
-
-    result = check_in(plate)
-
-    print(result)
-
-# r = payment_status(vehicle_id)
-# print(r)
-
-# # 3. Try Check-In Again
-
-
-# print("\n--- SECOND CHECK-IN ---")
-
-# result = check_in(plate)
-
-# print(result)
+# 5. Check another vehicle in
+result = check_in("MP09CD5678")
+print("Check-in:", result)
 
 
 
-# # # ==========================
-# # # Display Vehicles
-# # # ==========================
+# 7. Display all vehicles
+vehicles = get_all_vehicles()
 
-# print("\n--- VEHICLES DATABASE ---")
+print("\nAll Vehicles:")
+for vehicle in vehicles:
+    print(dict(vehicle))
 
-# vehicles = get_all_vehicles()
+# 8. Display parking records
+parking = get_all_parking_records()
 
-# for vehicle in vehicles:
+print("\nParking Records:")
+for record in parking:
+    print(dict(record))
+    
+# Check out vehicle
+result = check_out("MP04AB1234")
 
-#     print(
-#         dict(vehicle)
-#     )
+print("\nCheck-out:")
+print(result)
 
+# Get parking ID
+park_id = result["parking_id"]
 
-# ==========================
-# Display Parking Database
-# ==========================
+# Mark payment as done
+payment = payment_status(park_id)
 
-print("\n--- PARKING DATABASE ---")
+print("\nPayment:")
+print(payment)
 
-parking_records = get_all_parking_records()
+# Check database
+parking = get_all_parking_records()
 
-for record in parking_records:
-
-    print(
-        dict(record)
-    )
-
-# val = get_parking_amount(1)
-# print(val["TIME"])
-# print(val["AMOUNT"],"/-")
-
-
-# ==========================
-# DATABASE TEST
-# ==========================
-
-# Vehicle created successfully.
-# Vehicle ID: 1
-
-# --- CHECK-IN ---
-# {'success': True, 'message': 'Vehicle checked in successfully.', 'vehicle_id': 1, 'parking_id': 1}
-
-# --- SECOND CHECK-IN ---
-# {'success': False, 'message': 'Vehicle is already checked in.', 'vehicle_id': 1, 'parking_id': 1}
-
-# --- CHECK-OUT ---
-# {'success': True, 'message': 'Vehicle checked out successfully.', 'vehicle_id': 1, 'parking_id': 1}
-
-# --- SECOND CHECK-OUT ---
-# {'success': False, 'message': 'No matching parking record found. Vehicle is not currently parked.'}
-
-# --- VEHICLES DATABASE ---
-# {'id': 1, 'plate_number': 'MP09AA1234', 'vehicle_type': 'Car'}
-
-# --- PARKING DATABASE ---
-# {'id': 1, 'vehicle_id': 1, 'check_in_time': '2026-08-08 07:57:47', 'check_out_time': '2026-08-08 07:57:47', 'status': 'COMPLETED'}
+print("\nUpdated Parking Records:")
+for record in parking:
+    print(dict(record))
