@@ -33,7 +33,7 @@ def create_tables():
             status TEXT NOT NULL DEFAULT 'PARKED',
             Ttime REAL,
             Tamount INTEGER,
-
+            Payment_status TEXT,
             FOREIGN KEY (vehicle_id)
             REFERENCES vehicles(id)
         )    
@@ -286,3 +286,5 @@ def get_admin_search(plate):
 
     return rows
 
+
+# function for payment recived 
