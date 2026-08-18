@@ -288,3 +288,19 @@ def get_admin_search(plate):
 
 
 # function for payment recived 
+def payment_status(park_id):
+    conn = get_conn()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("""
+            UPDATE parking SET Payment_status = 'DONE' WHERE id = ?
+        """,(park_id,))
+        conn.commit()
+        conn.close()
+        return {
+            'success' : True
+        }
+    except Exception as e:
+        return{
+            'success' : False
+        }
