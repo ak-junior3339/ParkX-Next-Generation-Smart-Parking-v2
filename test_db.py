@@ -8,7 +8,8 @@ from database import (
     check_out,
     get_all_vehicles,
     get_all_parking_records,
-    get_parking_amount
+    get_parking_amount,
+    payment_status
 )
 
 
@@ -42,7 +43,8 @@ else:
 
     print(result)
 
-
+# r = payment_status(vehicle_id)
+# print(r)
 
 # # 3. Try Check-In Again
 
