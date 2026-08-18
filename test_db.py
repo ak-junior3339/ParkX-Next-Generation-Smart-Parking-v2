@@ -86,9 +86,6 @@ for record in parking_records:
         dict(record)
     )
 
-
-
-
 # val = get_parking_amount(1)
 # print(val["TIME"])
 # print(val["AMOUNT"],"/-")
