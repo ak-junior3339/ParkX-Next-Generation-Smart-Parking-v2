@@ -218,5 +218,5 @@ This project is licensed under the MIT License
 
 ## TODO (this section will be removed)
 
-### a good checkout page with provision for qr , fastag etc. (50 % complete)
+### a good checkout page with provision for qr , fastag etc. (90 % complete) integrate payment status function
 ### complete readme
