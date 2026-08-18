@@ -37,38 +37,37 @@ if vehicle is None:
     print("Vehicle ID:", vehicle_id)
 
 else:
-÷
-result = check_in(plate)
 
-print(result)
+    result = check_in(plate)
 
-
-
-# 3. Try Check-In Again
+    print(result)
 
 
-print("\n--- SECOND CHECK-IN ---")
 
-result = check_in(plate)
-
-print(result)
+# # 3. Try Check-In Again
 
 
-÷
+# print("\n--- SECOND CHECK-IN ---")
 
-# # ==========================
-# # Display Vehicles
-# # ==========================
+# result = check_in(plate)
 
-print("\n--- VEHICLES DATABASE ---")
+# print(result)
 
-vehicles = get_all_vehicles()
 
-for vehicle in vehicles:
 
-    print(
-        dict(vehicle)
-    )
+# # # ==========================
+# # # Display Vehicles
+# # # ==========================
+
+# print("\n--- VEHICLES DATABASE ---")
+
+# vehicles = get_all_vehicles()
+
+# for vehicle in vehicles:
+
+#     print(
+#         dict(vehicle)
+#     )
 
 
 # ==========================
@@ -88,9 +87,9 @@ for record in parking_records:
 
 
 
-val = get_parking_amount(1)
-print(val["TIME"])
-print(val["AMOUNT"],"/-")
+# val = get_parking_amount(1)
+# print(val["TIME"])
+# print(val["AMOUNT"],"/-")
 
 
 # ==========================
