@@ -207,6 +207,14 @@ checkOutButton.addEventListener("click",async function ()  {
                 document.getElementById("payicons").style.display = "none";
                 document.getElementById("upiinterface").style.display = "block";
             });
+            const fastagButton = document.getElementById("fastag");
+            fastagButton.addEventListener("click", function(event) {
+                event.preventDefault();
+
+                document.getElementById("checkoutcard").style.display = "none";
+                document.getElementById("payicons").style.display = "none";
+                document.getElementById("fastaginterface").style.display = "block";
+            });
 
         } else {
             alert("Checkout failed.");
