@@ -10,7 +10,7 @@ import subprocess
 import sys
 import json
 import cv2
-from database import create_tables , check_in , check_out , get_all_vehicles , get_all_parking_records,get_all_stats,get_admin_search
+from database import create_tables , check_in , check_out , get_all_vehicles , get_all_parking_records,get_all_stats,get_admin_search,payment_statusUPI,payment_statusFastag
 from pydantic import BaseModel
 
 app = FastAPI(title="Smart-Park" , version="3.0")
@@ -314,9 +314,12 @@ async def admin_search(plate: str = Form(...)):
 #         "time": parking_time
 #         }
 #     )
+
+class PaymentRequest(BaseModel):
+    plate_number: str
 @app.post("/upi-pay-update")
-def updateupistatus(plate : str = Form(...)):
-    record = payment_statusUPI(plate)
+def updateupistatus(request: PaymentRequest):
+    record = payment_statusUPI(request.plate_number)
     if record :
         return {
             'success' : True,
@@ -329,8 +332,8 @@ def updateupistatus(plate : str = Form(...)):
         }
 
 @app.post("/fastag-pay-update")
-def updatefastagstatus(plate : str = Form(...)):
-    record = payment_statusFastag(plate)
+def updatefastagstatus(request: PaymentRequest):
+    record = payment_statusFastag(request.plate_number)
     if record :
         return {
             'success' : True,
