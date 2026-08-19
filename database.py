@@ -289,12 +289,12 @@ def get_admin_search(plate):
 
 # function for payment recived 
 # this function is only to update the payment status when payment is done via upi or fastag
-def payment_status(park_id):
+def payment_statusUPI(park_id):
     conn = get_conn()
     cursor = conn.cursor()
     try:
         cursor.execute("""
-            UPDATE parking SET Payment_status = 'DONE' WHERE id = ?
+            UPDATE parking SET Payment_status = 'DONE(UPI)' WHERE id = ?
         """,(park_id,))
         conn.commit()
         return {
