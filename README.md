@@ -189,11 +189,8 @@ To Access Admin Content use the password : Admin1234 (Hard-Coded)
 ##  Roadmap / Future Scope
 
 The current build is a fully working, self-contained ANPR parking pipeline. Planned upgrades to move it toward a production-grade, revenue-ready system:
-
--  **Automated Payment & FASTag Integration** — calculate parking cost dynamically based on `check_in_time`/`check_out_time` duration and a configurable rate card, and settle it automatically via **FASTag / UPI / payment gateway** at exit, removing manual cash handling entirely.
 -  **Slot-Level Allocation** — extend the schema with a `slots` table so each check-in is mapped to a specific, trackable parking bay (`A-12`, `B-04`, etc.), enabling slot-wise availability and guided navigation to an open spot.
 -  **Live Camera Feed Integration** — move from manual image upload to a live RTSP/webcam feed at the boom barrier for a true contactless flow.
--  **Blacklist/Whitelist Lists** — flag stolen/unauthorized vehicles automatically at entry.
 ---
 
 ## What This Project Demonstrates
