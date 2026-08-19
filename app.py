@@ -328,6 +328,7 @@ def updateupistatus(plate : str = Form(...)):
             'message' : 'Payment Denied'
         }
 
+@app.post("/fastag-pay-update")
 def updatefastagstatus(plate : str = Form(...)):
     record = payment_statusFastag(plate)
     if record :
