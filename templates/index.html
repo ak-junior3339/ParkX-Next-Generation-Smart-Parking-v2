@@ -196,7 +196,6 @@ checkOutButton.addEventListener("click",async function ()  {
             })
         });
     if (response.ok) {
-
             const html = await response.text();
             document.documentElement.innerHTML = html;
             const upiButton = document.getElementById("upi");
@@ -218,6 +217,7 @@ checkOutButton.addEventListener("click",async function ()  {
 
             const upisubmit = document.getElementById("upisubmitpay");
             upisubmit.addEventListener("click",async function (event){
+                const plate = "{{ plate }}";
                 const response = await fetch ("/upi-pay-update",{
                     method : "POST",
                     headers: {
@@ -227,7 +227,8 @@ checkOutButton.addEventListener("click",async function ()  {
                         plate_number : plate
                     })
                 });
-                if (response.success){
+                const data = await response.json();
+                if (data.success){
                     alert("Payment Succesfull");
                     window.location.href = "/";
                 }
@@ -236,7 +237,8 @@ checkOutButton.addEventListener("click",async function ()  {
                 }
             });
             const fastagsubmit = document.getElementById("fastagsubmitpay");
-            upisubmit.addEventListener("click",async function (event){
+            fastagsubmit.addEventListener("click",async function (event){
+                const plate = "{{ plate }}";
                 const response = await fetch ("/fastag-pay-update",{
                     method : "POST",
                     headers: {
@@ -246,15 +248,16 @@ checkOutButton.addEventListener("click",async function ()  {
                         plate_number : plate
                     })
                 });
+                const data = await response.json();
+                if (data.success){
+                    alert("Payment Succesfull");
+                    window.location.href = "/";
+                }
+                else{
+                    alert('Checkout Failed')
+                }
             });
-            if (response.success){
-                alert("Payment Succesfull");
-                window.location.href = "/";
-            }
-            else{
-                alert('Checkout Failed')
-            }
-
+            
         } else {
             alert("Checkout failed.");
         }
