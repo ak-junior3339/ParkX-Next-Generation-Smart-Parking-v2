@@ -33,7 +33,7 @@ def create_tables():
             status TEXT NOT NULL DEFAULT 'PARKED',
             Ttime REAL,
             Tamount INTEGER,
-            Payment_status TEXT,
+            Payment_status TEXT NOT NULL DEFAULT 'PENDING',
             FOREIGN KEY (vehicle_id)
             REFERENCES vehicles(id)
         )    
@@ -289,39 +289,58 @@ def get_admin_search(plate):
 
 # function for payment recived 
 # this function is only to update the payment status when payment is done via upi 
-def payment_statusUPI(park_id):
+def payment_statusFastag(plate):
+
     conn = get_conn()
     cursor = conn.cursor()
+
     try:
+        vehicle = get_vehicle(plate)
+
+        if vehicle is None:
+            return False
+
         cursor.execute("""
-            UPDATE parking SET Payment_status = 'DONE(UPI)' WHERE id = ?
-        """,(park_id,))
+            UPDATE parking
+            SET Payment_status = 'DONE(Fastag)'
+            WHERE vehicle_id = ? AND Payment_status = 'PENDING'
+        """, (vehicle["id"],))
+
         conn.commit()
-        return {
-            'success' : True
-        }
+
+        return cursor.rowcount > 0
+
     except Exception as e:
-        return{
-            'success' : False
-        }
-    finally :
+        print("Payment Error:", e)
+        return False
+
+    finally:
         conn.close()
 
+def payment_statusUPI(plate):
 
-def payment_statusFastag(park_id):
     conn = get_conn()
     cursor = conn.cursor()
+
     try:
+        vehicle = get_vehicle(plate)
+
+        if vehicle is None:
+            return False
+
         cursor.execute("""
-            UPDATE parking SET Payment_status = 'DONE(Fastag)' WHERE id = ?
-        """,(park_id,))
+            UPDATE parking
+            SET Payment_status = 'DONE(UPI)'
+            WHERE vehicle_id = ? AND Payment_status = 'PENDING'
+        """, (vehicle["id"],))
+
         conn.commit()
-        return {
-            'success' : True
-        }
+
+        return cursor.rowcount > 0
+
     except Exception as e:
-        return{
-            'success' : False
-        }
-    finally :
+        print("Payment Error:", e)
+        return False
+
+    finally:
         conn.close()
