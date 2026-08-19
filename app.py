@@ -314,3 +314,16 @@ async def admin_search(plate: str = Form(...)):
 #         "time": parking_time
 #         }
 #     )
+@app.post("/upi-pay-update")
+def updateupistatus(plate : str = Form(...)):
+    record = payment_statusUPI(plate)
+    if record :
+        return {
+            'success' : True,
+            'message' : 'Payment Success'
+        }
+    else : 
+        return {
+            'success' : False,
+            'message' : 'Payment Denied'
+        }
