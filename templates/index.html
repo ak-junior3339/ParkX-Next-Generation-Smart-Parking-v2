@@ -216,6 +216,45 @@ checkOutButton.addEventListener("click",async function ()  {
                 document.getElementById("fastaginterface").style.display = "block";
             });
 
+            const upisubmit = document.getElementById("upisubmitpay");
+            upisubmit.addEventListener("click",async function (event){
+                const response = await fetch ("/upi-pay-update",{
+                    method : "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body : JSON.stringify({
+                        plate_number : plate
+                    })
+                });
+                if (response.success){
+                    alert("Payment Succesfull");
+                    window.location.href = "/";
+                }
+                else{
+                    alert('Checkout Failed')
+                }
+            });
+            const fastagsubmit = document.getElementById("fastagsubmitpay");
+            upisubmit.addEventListener("click",async function (event){
+                const response = await fetch ("/fastag-pay-update",{
+                    method : "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body : JSON.stringify({
+                        plate_number : plate
+                    })
+                });
+            });
+            if (response.success){
+                alert("Payment Succesfull");
+                window.location.href = "/";
+            }
+            else{
+                alert('Checkout Failed')
+            }
+
         } else {
             alert("Checkout failed.");
         }
