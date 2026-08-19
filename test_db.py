@@ -9,7 +9,7 @@ from database import (
     get_all_vehicles,
     get_all_parking_records,
     get_parking_amount,
-    payment_status
+    payment_statusUPI
 )
 from database import *
 
@@ -57,11 +57,8 @@ result = check_out("MP04AB1234")
 print("\nCheck-out:")
 print(result)
 
-# Get parking ID
-park_id = result["parking_id"]
-
 # Mark payment as done
-payment = payment_status(park_id)
+payment = payment_statusUPI("MP04AB1234")
 
 print("\nPayment:")
 print(payment)
