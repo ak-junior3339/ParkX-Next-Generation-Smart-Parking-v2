@@ -327,3 +327,16 @@ def updateupistatus(plate : str = Form(...)):
             'success' : False,
             'message' : 'Payment Denied'
         }
+
+def updatefastagstatus(plate : str = Form(...)):
+    record = payment_statusFastag(plate)
+    if record :
+        return {
+            'success' : True,
+            'message' : 'Payment Success'
+        }
+    else : 
+        return {
+            'success' : False,
+            'message' : 'Payment Denied'
+        }
