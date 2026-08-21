@@ -11,61 +11,65 @@ from database import (
     get_parking_amount,
     payment_statusUPI
 )
-from database import *
 
-# 1. Create tables
-create_tables()
+# from database import *
 
-# 2. Add vehicles
-vehicle1 = add_vehicles("MP04AB1234")
-vehicle2 = add_vehicles("MP09CD5678")
+# # 1. Create tables
+# create_tables()
 
-print("Vehicle 1 ID:", vehicle1)
-print("Vehicle 2 ID:", vehicle2)
+# # 2. Add vehicles
+# vehicle1 = add_vehicles("MP04AB1234")
+# vehicle2 = add_vehicles("MP09CD5678")
 
-# 3. Get vehicle
-vehicle = get_vehicle("MP04AB1234")
-print("Vehicle:", dict(vehicle))
+# print("Vehicle 1 ID:", vehicle1)
+# print("Vehicle 2 ID:", vehicle2)
 
-# 4. Check in
-result = check_in("MP04AB1234")
-print("Check-in:", result)
+# # 3. Get vehicle
+# vehicle = get_vehicle("MP04AB1234")
+# print("Vehicle:", dict(vehicle))
 
-# 5. Check another vehicle in
-result = check_in("MP09CD5678")
-print("Check-in:", result)
+# # 4. Check in
+# result = check_in("MP04AB1234")
+# print("Check-in:", result)
+
+# # 5. Check another vehicle in
+# result = check_in("MP09CD5678")
+# print("Check-in:", result)
 
 
 
-# 7. Display all vehicles
-vehicles = get_all_vehicles()
+# # 7. Display all vehicles
+# vehicles = get_all_vehicles()
 
-print("\nAll Vehicles:")
-for vehicle in vehicles:
-    print(dict(vehicle))
+# print("\nAll Vehicles:")
+# for vehicle in vehicles:
+#     print(dict(vehicle))
 
-# 8. Display parking records
-parking = get_all_parking_records()
+# # 8. Display parking records
+# parking = get_all_parking_records()
 
-print("\nParking Records:")
-for record in parking:
-    print(dict(record))
+# print("\nParking Records:")
+# for record in parking:
+#     print(dict(record))
     
-# Check out vehicle
-result = check_out("MP04AB1234")
+# # Check out vehicle
+# result = check_out("MP04AB1234")
 
-print("\nCheck-out:")
-print(result)
+# print("\nCheck-out:")
+# print(result)
 
-# Mark payment as done
-payment = payment_statusUPI("MP04AB1234")
+# # Mark payment as done
+# payment = payment_statusUPI("MP04AB1234")
 
-print("\nPayment:")
-print(payment)
+# print("\nPayment:")
+# print(payment)
 
-# Check database
-parking = get_all_parking_records()
+# # Check database
+# parking = get_all_parking_records()
 
-print("\nUpdated Parking Records:")
-for record in parking:
-    print(dict(record))
+# print("\nUpdated Parking Records:")
+# for record in parking:
+#     print(dict(record))
+record = get_all_parking_records()
+for i in record:
+   
