@@ -217,7 +217,8 @@ checkOutButton.addEventListener("click",async function ()  {
 
             const upisubmit = document.getElementById("upisubmitpay");
             upisubmit.addEventListener("click",async function (event){
-                const plate = "{{ plate }}";
+                const plateText = document.querySelector("#upiinterface p").textContent;
+                const plate = plateText.replace("Vehicle Number: ", "").trim();
                 const response = await fetch ("/upi-pay-update",{
                     method : "POST",
                     headers: {
@@ -238,7 +239,8 @@ checkOutButton.addEventListener("click",async function ()  {
             });
             const fastagsubmit = document.getElementById("fastagsubmitpay");
             fastagsubmit.addEventListener("click",async function (event){
-                const plate = "{{ plate }}";
+                const plateText = document.querySelector("#fastaginterface p").textContent;
+                const plate = plateText.replace("Vehicle Number: ", "").trim();
                 const response = await fetch ("/fastag-pay-update",{
                     method : "POST",
                     headers: {
@@ -255,6 +257,7 @@ checkOutButton.addEventListener("click",async function ()  {
                 }
                 else{
                     alert('Checkout Failed')
+                    // console.log (data.success)
                 }
             });
             
