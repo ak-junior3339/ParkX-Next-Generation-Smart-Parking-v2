@@ -281,6 +281,7 @@ def get_admin_search(plate):
         WHERE vehicles.plate_number = ?
     """, (plate,))
 # added the new Ttime ad Tamount in admin search
+# added the new paymnet status column in select query
     rows = cursor.fetchall()
 
     conn.close()
