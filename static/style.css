@@ -377,16 +377,16 @@ select {
   background-size: 16px;
 }
 
-
 .vehicle-table-container {
     width: 100%;
-    max-width: 900px;
+    max-width: 1300px;
     margin: 30px auto;
     overflow-x: auto;
 }
 
 #vehicleTable {
     width: 100%;
+    min-width: 1000px;
     border-collapse: collapse;
     background-color: #ffffff;
     border-radius: 12px;
@@ -394,7 +394,6 @@ select {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* Table Header */
 #vehicleTable thead {
     background-color: #D85A30;
     color: #ffffff;
@@ -402,34 +401,28 @@ select {
 
 #vehicleTable th {
     padding: 14px 18px;
-    text-align: left;
+    text-align: center;
     font-size: 0.95rem;
     text-transform: uppercase;
     letter-spacing: 0.05rem;
+    white-space: normal;
 }
-
 
 #vehicleTable td {
     padding: 14px 18px;
     border-bottom: 1px solid #eeeeee;
     color: #333333;
     font-size: 0.95rem;
+    text-align: center;
 }
-
 
 #vehicleTable tbody tr:nth-child(even) {
     background-color: #fafafa;
 }
 
-
 #vehicleTable tbody tr:hover {
     background-color: #fff3ef;
     transition: background-color 0.2s ease;
-}
-
-
-#vehicleTable tbody tr:last-child td {
-    border-bottom: none;
 }
 
 #parkingTable {
