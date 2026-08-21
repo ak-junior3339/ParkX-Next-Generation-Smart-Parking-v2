@@ -215,7 +215,7 @@ This project is licensed under the MIT License
 
 ## TODO (this section will be removed)
 
-### 1 upi payment function still not working error resolution
+### 1 Admin panel fix please
 ### 2 fastag payment function still not working error resolution
 ### 3 complete readme
 ### 4 screenshots
