@@ -329,6 +329,7 @@ async function loadDashboardData() {
                 // fixing the decimal to 5 digits only
                 <td>${Number(parking.Ttime).toFixed(5)}</td>  
                 <td>${parking.Tamount}</td>
+                <td>${parking.Payment_status}</td>
             `;
 
             Pbody.appendChild(trElement);
